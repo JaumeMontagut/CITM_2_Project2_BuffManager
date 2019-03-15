@@ -22,18 +22,22 @@ public:
 	Buff(BUFF_TYPE type, float value, uint source_id) :
 		type(type),
 		value(value),
-		source_id(source_id) {
+		source_id(source_id)
+	{
 	}
 
-	BUFF_TYPE GetType() {
+	BUFF_TYPE GetType()
+	{
 		return type;
 	}
 
-	int GetValue() {
+	int GetValue()
+	{
 		return value;
 	}
 
-	uint GetSource() {
+	uint GetSource()
+	{
 		return source_id;
 	}
 };
@@ -43,22 +47,24 @@ class Stat {
 private:
 	float base;// The value of the stat without adding any buff
 	float finalValue;
-	std::vector<Buff> additive_buffs;
-	std::vector<Buff> multiplicative_buffs;
+	std::vector<Buff*> additive_buffs;
+	std::vector<Buff*> multiplicative_buffs;
 
 public:
-	Stat() {
+	Stat()
+	{
 		finalValue = base;
 	}
 
-	void AddBuff(Buff buff) {
+	void AddBuff(Buff buff)
+	{
 		switch (buff.GetType())
 		{
 		case BUFF_TYPE::ADDITIVE:
-			additive_buffs.push_back(buff);
+			additive_buffs.push_back(&buff);
 			break;
 		case BUFF_TYPE::MULTIPLICATIVE:
-			multiplicative_buffs.push_back(buff);
+			multiplicative_buffs.push_back(&buff);
 			break;
 		default:
 			LOG("Buff type not detected.");
@@ -66,20 +72,29 @@ public:
 		}
 	}
 
-	void CalculateStat() {
+	void RemoveBuff()
+	{
+
+	}
+
+	void CalculateStat()
+	{
 		//1. Apply addtive buffs
-		for (std::vector<Buff>::iterator *iter = additive_buffs.begin; iter != additive_buffs.end; *iter++) {
+		for (std::vector<Buff*>::iterator iter = additive_buffs.begin(); iter != additive_buffs.end(); ++iter)
+		{
 			(*iter)->GetValue();
 		}
 		//2. Add multiplicative buffs and calculate the percentage
 	}
 
-	int GetValue() {
+	int GetValue()
+	{
 		return finalValue;
 	}
 };
 
-class Character {
+class Character
+{
 private:
 	float curr_health;
 	Stat max_health;
@@ -96,11 +111,14 @@ private:
 	Stat gold_gain;
 
 public:
-	void DealDamage(Character reciever) {
+	void DealDamage(Character reciever)
+	{
 		int damage = attack.GetValue() - reciever.defense.GetValue();
-		if (damage > 0) {
+		if (damage > 0)
+		{
 			reciever.curr_health -= damage;
-			if (reciever.curr_health <= 0.f) {
+			if (reciever.curr_health <= 0.f)
+			{
 				//Die
 			}
 		}
