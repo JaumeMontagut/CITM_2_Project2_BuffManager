@@ -40,17 +40,33 @@ public:
 	}
 };
 
-//class Attribute : public BaseAttribute {
-//private:
-//	RawBonus * raw_bonuses;
-//	FinalBonus * final_bonuses;
-//	int final_value;
-//
-//public:
-//	Attribute(int starting_value) : BaseAttribute(starting_value) {
-//
-//	}
-//};
+class Attribute : public BaseAttribute {
+private:
+	std::list<RawBonus> raw_bonuses;
+	std::list<FinalBonus> final_bonuses;
+	int final_value;
+
+public:
+	Attribute(int starting_value) : BaseAttribute(starting_value, 0.f) {
+
+	}
+
+	void AddRawBonus(RawBonus bonus) {
+		raw_bonuses.push_back(bonus);
+	}
+
+	void AddFinalBonus(FinalBonus bonus) {
+		final_bonuses.push_back(bonus);
+	}
+
+	void RemoveRawBonus(RawBonus bonus) {
+		RawBonus * iter = std::find(raw_bonuses.begin, raw_bonuses.end, bonus);
+		if (iter != raw_bonuses.end)//Find returns end when it doesn't find the element
+		{
+			raw_bonuses.remove(*iter);
+		}
+	}
+};
 
 class j1Scene : public j1Module
 {
