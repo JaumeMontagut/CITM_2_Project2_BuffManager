@@ -17,33 +17,74 @@ private:
 	BUFF_TYPE type;
 	float value;
 	uint source_id;//ID from which modifier (object, etc) the buff came from
+
+public:
+	Buff(BUFF_TYPE type, float value, uint source_id) :
+		type(type),
+		value(value),
+		source_id(source_id) {
+	}
+
+	BUFF_TYPE GetType() {
+		return type;
+	}
+
+	int GetValue() {
+		return value;
+	}
+
+	uint GetSource() {
+		return source_id;
+	}
 };
 
 //A class used in any stat which can be boosted by modifiers (equipment, skills, talent trees, enviroment, synergies, etc.)
 class Stat { 
 private:
-	int base;// The value of the stat without adding any buff
-	int finalValue;
+	float base;// The value of the stat without adding any buff
+	float finalValue;
 	std::vector<Buff> additive_buffs;
 	std::vector<Buff> multiplicative_buffs;
 
 public:
-	int GetValue() {
-		return finalValue;
+	Stat() {
+		finalValue = base;
+	}
+
+	void AddBuff(Buff buff) {
+		switch (buff.GetType())
+		{
+		case BUFF_TYPE::ADDITIVE:
+			additive_buffs.push_back(buff);
+			break;
+		case BUFF_TYPE::MULTIPLICATIVE:
+			multiplicative_buffs.push_back(buff);
+			break;
+		default:
+			LOG("Buff type not detected.");
+			break;
+		}
 	}
 
 	void CalculateStat() {
 		//1. Apply addtive buffs
+		for (std::vector<Buff>::iterator *iter = additive_buffs.begin; iter != additive_buffs.end; *iter++) {
+			(*iter)->GetValue();
+		}
 		//2. Add multiplicative buffs and calculate the percentage
+	}
+
+	int GetValue() {
+		return finalValue;
 	}
 };
 
 class Character {
 private:
-	int curr_health;
+	float curr_health;
 	Stat max_health;
 	
-	int curr_mana;
+	float curr_mana;
 	Stat max_mana;
 
 	Stat attack;
@@ -59,7 +100,7 @@ public:
 		int damage = attack.GetValue() - reciever.defense.GetValue();
 		if (damage > 0) {
 			reciever.curr_health -= damage;
-			if (reciever.curr_health <= 0) {
+			if (reciever.curr_health <= 0.f) {
 				//Die
 			}
 		}
