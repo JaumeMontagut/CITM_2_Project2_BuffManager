@@ -72,9 +72,17 @@ public:
 		}
 	}
 
-	void RemoveBuff()
+	//Searches through all the buffs
+	//And removes the ones caused by the source
+	void RemoveBuff(uint source_id)
 	{
-
+		//INFO: Travels the vector from the end to the begging
+		for (std::vector<Buff*>::reverse_iterator iter = additive_buffs.rbegin(); iter != additive_buffs.rend(); ++iter) {
+			//if((*iter)->GetSource() == source_id)
+			//{
+			//	additive_buffs.erase(iter);
+			//}
+		}
 	}
 
 	void CalculateStat()
@@ -138,6 +146,7 @@ public:
 //- Cooldown
 //- Range
 //- Cost (to deploy a unit)
+//- Duration
 
 class j1Scene : public j1Module
 {
