@@ -35,6 +35,10 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
+
+public:
+	Character* caster = nullptr;
+	Character* target = nullptr;
 };
 
 #endif // __j1SCENE_H__

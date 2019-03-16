@@ -35,14 +35,14 @@ public:
 //A class used in any stat which can be boosted by modifiers (equipment, skills, talent trees, enviroment, synergies, etc.)
 class Stat { 
 private:
-	float finalValue;
+	float final_value;
 	std::vector<Buff*> additive_buffs;
 	std::vector<Buff*> multiplicative_buffs;
 
 public:
 	float base;// The value of the stat without adding any buff
 	//TO IMPROVE: Make this field private
-	Stat();
+	Stat(int base);
 
 	void AddBuff(Buff buff);
 	void RemoveBuff(uint source_id);
@@ -68,7 +68,7 @@ public:
 	bool Start() override;
 	bool Update(float dt) override;
 
-	void DealDamage(Character reciever);
+	void DealDamage(Character * reciever);
 	void AddBuff();
 	void RemoveItem(int source_id);
 };

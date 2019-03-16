@@ -47,9 +47,10 @@ bool Buff::IsCausedBySource(uint source_id) {
 
 # pragma region Stat
 
-Stat::Stat()
+Stat::Stat(int base) :
+	base(base),
+	final_value(base)
 {
-	finalValue = base;
 }
 
 void Stat::AddBuff(Buff buff)
@@ -93,7 +94,7 @@ void Stat::CalculateStat()
 	//1. Apply addtive buffs
 	for (std::vector<Buff*>::iterator iter = additive_buffs.begin(); iter != additive_buffs.end(); ++iter)
 	{
-		finalValue += (*iter)->GetValue();
+		final_value += (*iter)->GetValue();
 	}
 	//2. Add multiplicative buffs and calculate the percentage
 	float totalMult;
@@ -101,12 +102,12 @@ void Stat::CalculateStat()
 	{
 		totalMult = (*iter)->GetValue();
 	}
-	finalValue += totalMult * finalValue;
+	final_value += totalMult * final_value;
 }
 
 int Stat::GetValue()
 {
-	return finalValue;
+	return final_value;
 }
 
 #pragma endregion Stat
@@ -114,11 +115,12 @@ int Stat::GetValue()
 
 
 #pragma region Character
-Character::Character(pugi::xml_node character_node) : Entity(character_node.attribute("x").as_int(), character_node.attribute("y").as_int())
+Character::Character(pugi::xml_node character_node) :
+	Entity(character_node.attribute("x").as_int(), character_node.attribute("y").as_int()),
+	attack(character_node.child("stats").child("attack").attribute("value").as_int()),
+	defense(character_node.child("stats").child("defense").attribute("value").as_int())
 {
 	max_health = curr_health = character_node.child("stats").child("health").attribute("value").as_int();
-	attack.base = character_node.child("stats").child("attack").attribute("value").as_int();
-	defense.base = character_node.child("stats").child("defense").attribute("value").as_int();
 	tex_path = character_node.child("spritesheet").attribute("path").as_string();
 	frame = {	character_node.child("animation").child("frame").attribute("x").as_int(),
 				character_node.child("animation").child("frame").attribute("y").as_int(),
@@ -135,22 +137,21 @@ bool Character::Start()
 bool Character::Update(float dt)
 {
 	App->render->Blit(tex, x - frame.w * 0.5f, y - frame.h, &frame);
-
 	//Health bar background
 	App->render->DrawQuad({x - 5, y - 22, 10, 2}, 0, 0, 0);
 	//Health bar fill
-	App->render->DrawQuad({ x - 5, y - 22, 10 * (int)(curr_health / (float)max_health), 2 }, 158, 41, 59);
+	App->render->DrawQuad({ x - 5, y - 22, (int)(10 * (curr_health / (float)max_health)), 2 }, 158, 41, 59);
 	return true;
 }
 
 
-void Character::DealDamage(Character reciever)
+void Character::DealDamage(Character * reciever)
 {
-	int damage = attack.GetValue() - reciever.defense.GetValue();
+	int damage = attack.GetValue() - reciever->defense.GetValue();
 	if (damage > 0)
 	{
-		reciever.curr_health -= damage;
-		if (reciever.curr_health <= 0.f)
+		reciever->curr_health -= damage;
+		if (reciever->curr_health <= 0.f)
 		{
 			//Die
 		}

@@ -34,14 +34,19 @@ bool j1Scene::Start()
 // Called each loop iteration
 bool j1Scene::PreUpdate()
 {
-
-
 	return true;
 }
 
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
+	//Attack when player presses 1
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
+		caster->DealDamage(target);
+	}
+
+
+	//Draw background
 	uint w, h;
 	App->win->GetWindowSize(w, h);
 	App->render->DrawQuad({ 0, 0, (int)w, (int)h }, 237, 190, 82);
