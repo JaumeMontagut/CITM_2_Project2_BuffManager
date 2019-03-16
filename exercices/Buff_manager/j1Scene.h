@@ -5,6 +5,7 @@
 #include "SDL/include/SDL_rect.h"
 #include <vector>
 #include <algorithm>
+#include "BuffManager.h"
 
 struct SDL_Texture;
 
@@ -18,7 +19,7 @@ public:
 	virtual ~j1Scene();
 
 	// Called before render is available
-	bool Awake();
+	bool Awake(pugi::xml_node& config);
 
 	// Called before the first frame
 	bool Start();

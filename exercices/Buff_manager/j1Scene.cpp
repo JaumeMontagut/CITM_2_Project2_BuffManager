@@ -7,6 +7,8 @@
 #include "j1Render.h"
 #include "j1Window.h"
 #include "j1Scene.h"
+#include "BuffManager.h"
+#include "j1Textures.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -18,12 +20,9 @@ j1Scene::~j1Scene()
 {}
 
 // Called before render is available
-bool j1Scene::Awake()
+bool j1Scene::Awake(pugi::xml_node& config)
 {
-	LOG("Loading Scene");
-	bool ret = true;
-
-	return ret;
+	return true;
 }
 
 // Called before the first frame
@@ -43,6 +42,10 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
+	uint w, h;
+	App->win->GetWindowSize(w, h);
+	App->render->DrawQuad({ 0, 0, (int)w, (int)h }, 237, 190, 82);
+	App->render->DrawQuad({ 10, 119, 120, 50 }, 74, 74, 74);
 	return true;
 }
 

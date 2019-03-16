@@ -38,6 +38,9 @@
     <ClCompile Include="BuffManager.cpp">
       <Filter>Tools</Filter>
     </ClCompile>
+    <ClCompile Include="j1Entity.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1App.h">
@@ -87,6 +90,9 @@
     </ClInclude>
     <ClInclude Include="BuffManager.h">
       <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Entity.h">
+      <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

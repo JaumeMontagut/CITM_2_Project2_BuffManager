@@ -4,6 +4,14 @@
 #include "p2Log.h"
 #include "BuffManager.h"
 #include <iostream> //To be able to use "unique_ptr"
+#include "j1Render.h"
+#include "j1App.h"
+#include "PugiXml/src/pugiconfig.hpp"
+#include "PugiXml/src/pugixml.hpp"
+#include "j1Textures.h"
+#include "SDL/include/SDL_rect.h"
+#include "j1Window.h"
+#include "j1Entity.h"
 
 #pragma Buff region
 
@@ -106,6 +114,35 @@ int Stat::GetValue()
 
 
 #pragma region Character
+Character::Character(pugi::xml_node character_node) : Entity(character_node.attribute("x").as_int(), character_node.attribute("y").as_int())
+{
+	max_health = curr_health = character_node.child("stats").child("health").attribute("value").as_int();
+	attack.base = character_node.child("stats").child("attack").attribute("value").as_int();
+	defense.base = character_node.child("stats").child("defense").attribute("value").as_int();
+	tex_path = character_node.child("spritesheet").attribute("path").as_string();
+	frame = {	character_node.child("animation").child("frame").attribute("x").as_int(),
+				character_node.child("animation").child("frame").attribute("y").as_int(),
+				character_node.child("animation").child("frame").attribute("w").as_int(),
+				character_node.child("animation").child("frame").attribute("h").as_int() };
+}
+
+bool Character::Start()
+{
+	tex = App->tex->Load(tex_path.c_str());
+	return false;
+}
+
+bool Character::Update(float dt)
+{
+	App->render->Blit(tex, x - frame.w * 0.5f, y - frame.h, &frame);
+
+	//Health bar background
+	//App->render->DrawQuad({});
+	//Health bar fill
+	return true;
+}
+
+
 void Character::DealDamage(Character reciever)
 {
 	int damage = attack.GetValue() - reciever.defense.GetValue();

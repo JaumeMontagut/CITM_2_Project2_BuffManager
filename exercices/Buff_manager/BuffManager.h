@@ -5,6 +5,13 @@
 #include <algorithm>
 #include "p2Defs.h"
 #include "p2Log.h"
+#include "PugiXml/src/pugiconfig.hpp"
+#include "PugiXml/src/pugixml.hpp"
+#include "SDL/include/SDL_rect.h"
+#include "j1Entity.h"
+#include <string.h>
+
+struct SDL_Texture;
 
 enum class BUFF_TYPE {
 	ADDITIVE, //AKA: Flat, raw
@@ -28,12 +35,13 @@ public:
 //A class used in any stat which can be boosted by modifiers (equipment, skills, talent trees, enviroment, synergies, etc.)
 class Stat { 
 private:
-	float base;// The value of the stat without adding any buff
 	float finalValue;
 	std::vector<Buff*> additive_buffs;
 	std::vector<Buff*> multiplicative_buffs;
 
 public:
+	float base;// The value of the stat without adding any buff
+	//TO IMPROVE: Make this field private
 	Stat();
 
 	void AddBuff(Buff buff);
@@ -42,16 +50,24 @@ public:
 	int GetValue();
 };
 
-class Character
+class Character : public Entity
 {
 private:
-	float curr_health;
-	float max_health;
+	int curr_health;
+	int max_health;
 
 	Stat attack;
 	Stat defense;
 
+	std::string tex_path = "\0";
+	SDL_Texture * tex = nullptr;
+	SDL_Rect frame = { 0, 0, 0, 0 };
+
 public:
+	Character(pugi::xml_node character_node);
+	bool Start() override;
+	bool Update(float dt) override;
+
 	void DealDamage(Character reciever);
 	void AddBuff();
 	void RemoveItem(int source_id);

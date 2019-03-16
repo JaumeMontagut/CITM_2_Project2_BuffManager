@@ -10,11 +10,48 @@
   </renderer>
 
   <window>
-    <resolution width="1024" height="768" scale="1"/>
+    <resolution width="1024" height="720" scale="5"/>
     <fullscreen value="false"/>
     <borderless value="false"/>
-    <resizable value="false"/>
+    <resizable value="true"/>
     <fullscreen_window value="false"/>
   </window>
+
+  <entity>
+    <entity type ="character" x="40" y="119">
+      <name value="caster"/>
+      <pos x ="0" y="0"/>
+      <spritesheet path="Assets/Dwarf_Sprite_Sheet1.2v.png"/>
+      <animation>
+        <frame x="7" y="11" w="24" h="19"/>
+      </animation>
+      <stats>
+        <health value ="20"/>
+        <attack value ="10"/>
+        <defense value ="3"/>
+      </stats>
+    </entity>
+
+    <entity type ="character" x="100" y="119">
+      <name value="target"/>
+      <pos x ="0" y="0"/>
+      <spritesheet path="Assets/Imp Sprite Sheet.png"/>
+      <animation>
+        <frame x="170" y="212" w="15" h="12"/>
+      </animation>
+      <stats>
+        <health value ="20"/>
+        <attack value ="10"/>
+        <defense value ="3"/>
+      </stats>
+    </entity>
+
+    <!--
+    <item name = "sword">
+      <buff stat ="attack" value="3" type="additive"/>
+      <buff stat ="defense" value="3" type="addtitive"/>
+    </item>
+    -->
+  </entity>
 
 </config>
