@@ -137,8 +137,9 @@ bool Character::Update(float dt)
 	App->render->Blit(tex, x - frame.w * 0.5f, y - frame.h, &frame);
 
 	//Health bar background
-	//App->render->DrawQuad({});
+	App->render->DrawQuad({x - 5, y - 22, 10, 2}, 0, 0, 0);
 	//Health bar fill
+	App->render->DrawQuad({ x - 5, y - 22, 10 * (int)(curr_health / (float)max_health), 2 }, 158, 41, 59);
 	return true;
 }
 

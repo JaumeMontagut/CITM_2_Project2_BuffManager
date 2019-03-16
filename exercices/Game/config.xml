@@ -23,7 +23,7 @@
       <pos x ="0" y="0"/>
       <spritesheet path="Assets/Dwarf_Sprite_Sheet1.2v.png"/>
       <animation>
-        <frame x="7" y="11" w="24" h="19"/>
+        <frame x="3" y="11" w="28" h="19"/>
       </animation>
       <stats>
         <health value ="20"/>
