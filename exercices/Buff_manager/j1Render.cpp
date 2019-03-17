@@ -168,6 +168,92 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 	return ret;
 }
 
+bool j1Render::BlitUI(SDL_Texture* texture, int x, int y, float scale, const SDL_Rect* section, float speed, double angle, int pivot_x, int pivot_y) const
+{
+	bool ret = true;
+
+	SDL_Rect rect;
+
+	rect.x = x /** scale*/;
+	rect.y = y /** scale*/;
+
+	if (section != NULL)
+	{
+		rect.w = section->w;
+		rect.h = section->h;
+	}
+	else
+	{
+		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+	}
+
+	rect.w *= scale;
+	rect.h *= scale;
+
+	SDL_Point* p = NULL;
+	SDL_Point pivot;
+
+	if (pivot_x != INT_MAX && pivot_y != INT_MAX)
+	{
+		pivot.x = pivot_x;
+		pivot.y = pivot_y;
+		p = &pivot;
+	}
+
+	if (SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
+	{
+		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		ret = false;
+	}
+
+	return ret;
+}
+
+//bool j1Render::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, bool use_camera) const
+//{
+//	bool ret = true;
+//	int scale = App->win->GetScale();
+//
+//	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+//	SDL_SetRenderDrawColor(renderer, r, g, b, a);
+//
+//	SDL_Rect rec(rect);
+//
+//	if (use_camera)
+//	{
+//		rec.x = (int)(camera.w) + (-camera.x + rect.x * scale);
+//		rec.y = (int)(camera.h) + (-camera.y + rect.y * scale);
+//	}
+//	else
+//	{
+//		rec.x = rect.x * scale;
+//		rec.y = rect.y * scale;
+//	}
+//
+//	rec.w *= scale;
+//	rec.h *= scale;
+//
+//	if (use_camera == true)
+//	{
+//		if (!((camera.x / scale < rect.x + rect.w) && (rect.x < (camera.x + camera.w) / scale)
+//			&& (camera.y / scale < rect.y + rect.h) && (rect.y < (camera.y + camera.h) / scale)))
+//		{
+//
+//			return ret;
+//		}
+//	}
+//
+//	int result = (filled) ? SDL_RenderFillRect(renderer, &rec) : SDL_RenderDrawRect(renderer, &rec);
+//
+//	if (result != 0)
+//	{
+//		LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
+//		ret = false;
+//	}
+//
+//	return ret;
+//}
+
 bool j1Render::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, bool use_camera) const
 {
 	bool ret = true;

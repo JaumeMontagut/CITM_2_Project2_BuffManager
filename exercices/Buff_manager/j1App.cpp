@@ -13,6 +13,8 @@
 #include "j1Scene.h"
 #include "j1App.h"
 #include "j1Entity.h"
+#include "Module_UI.h"
+#include "j1Fonts.h"
 
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
@@ -26,6 +28,8 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	audio = new j1Audio();
 	scene = new j1Scene();
 	entity = new j1Entity();
+	ui = new Module_UI();
+	font = new j1Fonts();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -37,6 +41,8 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	// scene last
 	AddModule(scene);
 	AddModule(entity);
+	AddModule(font);
+	AddModule(ui);
 
 	// render last to swap buffer
 	AddModule(render);

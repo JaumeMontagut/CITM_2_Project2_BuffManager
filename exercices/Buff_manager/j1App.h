@@ -16,6 +16,8 @@ class j1Textures;
 class j1Audio;
 class j1Scene;
 class j1Entity;
+class Module_UI;
+class j1Fonts;
 
 class j1App
 {
@@ -45,7 +47,6 @@ public:
 	int GetArgc() const;
 	const char* GetArgv(int index) const;
 	const char* GetTitle() const;
-	const char* GetOrganization() const;
 	float GetDT() const;
 
 	void LoadGame(const char* file);
@@ -83,6 +84,8 @@ public:
 	j1Audio*			audio = nullptr;
 	j1Scene*			scene = nullptr;
 	j1Entity*			entity = nullptr;
+	Module_UI*			ui = nullptr;
+	j1Fonts*			font = nullptr;
 
 private:
 	std::list<j1Module*>	modules;

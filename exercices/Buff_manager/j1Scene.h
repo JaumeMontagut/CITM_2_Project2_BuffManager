@@ -6,10 +6,12 @@
 #include <vector>
 #include <algorithm>
 #include "BuffManager.h"
+#include "Module_UI.h"
 
+class Button;
 struct SDL_Texture;
 
-class j1Scene : public j1Module
+class j1Scene : public j1Module, public Gui_Listener
 {
 public:
 
@@ -36,9 +38,21 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	//virtual bool OnHover(UI_Object* object) { return true; }
+	//virtual bool RepeatHover(UI_Object* object) { return true; }
+	//virtual bool OutHover(UI_Object* object) { return true; }
+
+	virtual bool OnClick(UI_Object* object);
+	//virtual bool RepeatClick(UI_Object* object) { return true; }
+	//virtual bool OutClick(UI_Object* object) { return true; }
+
 public:
 	Character* caster = nullptr;
 	Character* target = nullptr;
+
+	TTF_Font * pixel_font = nullptr;
+
+	Button * attack_button = nullptr;
 };
 
 #endif // __j1SCENE_H__

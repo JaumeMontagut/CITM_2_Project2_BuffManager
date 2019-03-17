@@ -123,10 +123,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button_Input.cpp" />
+    <ClCompile Include="Image.cpp" />
     <ClCompile Include="j1Entity.cpp" />
     <ClCompile Include="j1App.cpp" />
     <ClCompile Include="j1Audio.cpp" />
     <ClCompile Include="BuffManager.cpp" />
+    <ClCompile Include="j1Fonts.cpp" />
     <ClCompile Include="j1Input.cpp" />
     <ClCompile Include="j1PerfTimer.cpp" />
     <ClCompile Include="j1Render.cpp" />
@@ -134,15 +137,24 @@
     <ClCompile Include="j1Textures.cpp" />
     <ClCompile Include="j1Timer.cpp" />
     <ClCompile Include="j1Window.cpp" />
+    <ClCompile Include="Label.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Module_UI.cpp" />
     <ClCompile Include="p2Log.cpp" />
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
+    <ClCompile Include="Slider.cpp" />
+    <ClCompile Include="Text_Panel.cpp" />
+    <ClCompile Include="UI_Object.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="Button_Input.h" />
+    <ClInclude Include="Image.h" />
     <ClInclude Include="j1App.h" />
     <ClInclude Include="j1Audio.h" />
     <ClInclude Include="BuffManager.h" />
     <ClInclude Include="j1Entity.h" />
+    <ClInclude Include="j1Fonts.h" />
     <ClInclude Include="j1Input.h" />
     <ClInclude Include="j1Module.h" />
     <ClInclude Include="j1PerfTimer.h" />
@@ -151,11 +163,16 @@
     <ClInclude Include="j1Textures.h" />
     <ClInclude Include="j1Timer.h" />
     <ClInclude Include="j1Window.h" />
+    <ClInclude Include="Label.h" />
+    <ClInclude Include="Module_UI.h" />
     <ClInclude Include="p2Defs.h" />
     <ClInclude Include="p2Log.h" />
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
+    <ClInclude Include="Slider.h" />
+    <ClInclude Include="Text_Panel.h" />
+    <ClInclude Include="UI_Object.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

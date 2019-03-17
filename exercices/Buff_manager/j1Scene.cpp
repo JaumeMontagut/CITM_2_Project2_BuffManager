@@ -9,6 +9,9 @@
 #include "j1Scene.h"
 #include "BuffManager.h"
 #include "j1Textures.h"
+#include "Module_UI.h"
+#include "Button_Input.h"
+#include "j1Fonts.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -28,6 +31,7 @@ bool j1Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool j1Scene::Start()
 {	
+	pixel_font = App->font->Load("fonts/pixelart.ttf", 24);
 	return true;
 }
 
@@ -40,6 +44,11 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
+
+	//App->ui->CreateLabel({ 50, 50 }, "this is a label", pixel_font, this);
+	//App->ui->CreateImage({ 50, 50 }, {0,0,16,16}, this);
+	attack_button = App->ui->CreateButton({ 50, 50 }, { 0,0,16,16 }, this);
+
 	//Attack when player presses 1
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
 		caster->DealDamage(target);
@@ -69,5 +78,13 @@ bool j1Scene::PostUpdate()
 bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
+	return true;
+}
+
+bool j1Scene::OnClick(UI_Object * object)
+{
+	if (object == attack_button) {
+		LOG("attack button clicked");
+	}
 	return true;
 }
