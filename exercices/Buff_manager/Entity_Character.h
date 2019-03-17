@@ -36,6 +36,7 @@ private:
 public:
 	Buff(BUFF_TYPE type, std::string stat, float value, uint source_id);
 	BUFF_TYPE GetType();
+	std::string GetStat();
 	int GetValue();
 	uint GetSource();
 	bool IsCausedBySource(uint source_id);
@@ -76,9 +77,6 @@ public:
 	bool Start() override;
 	bool Update(float dt) override;
 
-	void AddBuff();
-	void RemoveItem(int source_id);
-
 private:
 	int GetStatBaseValue(STAT_TYPE stat, pugi::xml_node stats_node);
 };
@@ -101,7 +99,7 @@ class BuffSource {
 public:
 	BuffSource(pugi::xml_node buff_source_node);
 
-private:
+public:
 	uint source_id;
 	std::list<Buff*> buffs;
 };

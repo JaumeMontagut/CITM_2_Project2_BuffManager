@@ -29,6 +29,10 @@ BUFF_TYPE Buff::GetType()
 	return type;
 }
 
+std::string Buff::GetStat() {
+	return stat;
+}
+
 int Buff::GetValue()
 {
 	return value;
@@ -68,12 +72,11 @@ void Stat::AddBuff(Buff buff)
 //Searches through all the buffs and removes the ones caused by the source
 void Stat::RemoveBuff(uint source_id)
 {
-	//additive_buffs.erase(std::remove_if(
-	//	additive_buffs.begin(),
-	//	additive_buffs.end(),
-	//	[source_id](std::unique_ptr<Buff*>& e)
-	//		{return (*e)->IsCausedBySource(source_id); }),
-	//	additive_buffs.end());
+	additive_buffs.erase(std::remove_if(
+		additive_buffs.begin(),
+		additive_buffs.end(),
+		[source_id](Buff * o) { return o->IsCausedBySource(source_id); }),
+		additive_buffs.end());
 
 	//multiplicative_buffs.erase(std::remove_if(
 	//	multiplicative_buffs.begin(),
@@ -81,8 +84,6 @@ void Stat::RemoveBuff(uint source_id)
 	//	[source_id](std::unique_ptr<Buff*>& e)
 	//		{return (*e)->IsCausedBySource(source_id); }),
 	//	multiplicative_buffs.end());
-	//TO IMPROVE: We could have an array of vectors and iterate through those.
-	//In that way each time we add a new BUFF_TYPE we wouldn't have to create a new "remove_if" like we've done here
 }
 
 void Stat::CalculateStat()
@@ -139,13 +140,6 @@ bool Character::Update(float dt)
 	//Health bar fill
 	App->render->DrawQuad({ x - 5, y - 22, (int)(10.f * ((float)curr_health / (float)max_health)), 2 }, 158, 41, 59);
 	return true;
-}
-
-void Character::AddBuff() {
-}
-
-void Character::RemoveItem(int source_id) {
-	//Go through each state and call Remove_buff
 }
 
 int Character::GetStatBaseValue(STAT_TYPE stat, pugi::xml_node stats_node)

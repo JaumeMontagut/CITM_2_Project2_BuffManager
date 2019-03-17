@@ -133,3 +133,16 @@ void Cut(Spell * spell)
 		App->buff->AddOutPutText("it's already dead...");
 	}
 }
+
+void AddSpellBuff(Spell * spell) {
+	for (std::list<Buff*>::iterator buff = spell->buffs.begin(); buff != spell->buffs.end(); ++buff) {
+		App->scene->dwarf->stats[(*buff)->GetStat()]->AddBuff(*(*buff));
+	}
+}
+
+void RemoveSpellBuff(Spell * spell) {
+	for (std::list<Buff*>::iterator buff = spell->buffs.begin(); buff != spell->buffs.end(); ++buff) {
+		App->scene->dwarf->stats[(*buff)->GetStat()]->RemoveBuff((*buff)->GetSource());
+	}
+	//Go through each state and call Remove_buff
+}
