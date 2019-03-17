@@ -75,15 +75,14 @@ void Stat::RemoveBuff(uint source_id)
 	additive_buffs.erase(std::remove_if(
 		additive_buffs.begin(),
 		additive_buffs.end(),
-		[source_id](Buff * o) { return o->IsCausedBySource(source_id); }),
+		[source_id](Buff * buff) { return buff->IsCausedBySource(source_id); }),
 		additive_buffs.end());
 
-	//multiplicative_buffs.erase(std::remove_if(
-	//	multiplicative_buffs.begin(),
-	//	multiplicative_buffs.end(),
-	//	[source_id](std::unique_ptr<Buff*>& e)
-	//		{return (*e)->IsCausedBySource(source_id); }),
-	//	multiplicative_buffs.end());
+	multiplicative_buffs.erase(std::remove_if(
+		multiplicative_buffs.begin(),
+		multiplicative_buffs.end(),
+		[source_id](Buff * buff) { return buff->IsCausedBySource(source_id); }),
+		multiplicative_buffs.end());
 }
 
 void Stat::CalculateStat()
