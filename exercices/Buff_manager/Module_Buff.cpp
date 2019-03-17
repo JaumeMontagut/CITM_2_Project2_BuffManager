@@ -35,24 +35,29 @@ bool Module_Buff::Awake(pugi::xml_node & buff_node)
 
 bool Module_Buff::Start() {
 	Button * new_button = nullptr;
+	int i = 0, j = 0, button_width = 16, scale_factor = 4;
+
 	for (pugi::xml_node spell_node = buff_node.child("spell"); spell_node; spell_node = spell_node.next_sibling("spell"))
 	{
 		//Create the spell
 		spells.push_back(new Spell(spell_node));
 
-		//TO IMPROVE: Set position dynamically
 		//Create a button for the spell
+		if (60 + i * (button_width * scale_factor + 10) + button_width * scale_factor > (10 + 120)*App->win->GetScale())
+		{
+			++j;
+			i = 0;
+		}
 		new_button = App->ui->CreateButton(
-			{ 60, 605 },
-			{ 16 * spell_node.child("atlas_icon").attribute("column").as_int(), 16 * spell_node.child("atlas_icon").attribute("row").as_int(), 16, 16 },
+			{ 60 + i * (button_width * scale_factor + 10), 605 + j * (button_width * scale_factor + 20) },
+			{ button_width * spell_node.child("atlas_icon").attribute("column").as_int(), 16 * spell_node.child("atlas_icon").attribute("row").as_int(), 16, 16 },
 			App->buff);
 		new_button->SetLabel(
 			{ new_button->position.x, new_button->position.y + new_button->section.h * new_button->scale_factor },
 			spell_node.attribute("name").as_string(),
 			App->ui->pixel_font_small);
-		//TO IMPROVE: Center label (button center - label half width)
-		//new_button->label->position.x = (attack_button->position.x + attack_button->section.w * attack_button->scale_factor * 0.5f) - (attack_button->label->section.w * 0.5f);
 		spell_buttons.push_back(new_button);
+		++i;
 	}
 	return true;
 }
@@ -78,6 +83,7 @@ BUFF_TYPE Module_Buff::GetBuffType(std::string buff_type)
 void Module_Buff::FillFunctionsMap()
 {
 	spell_functions["cut"] = &Cut;
+	spell_functions["add_buff"] = &AddSpellBuff;
 }
 
 void(*Module_Buff::GetFunctionPointer(std::string functionName))(Spell *) {
@@ -135,14 +141,17 @@ void Cut(Spell * spell)
 }
 
 void AddSpellBuff(Spell * spell) {
-	for (std::list<Buff*>::iterator buff = spell->buffs.begin(); buff != spell->buffs.end(); ++buff) {
-		App->scene->dwarf->stats[(*buff)->GetStat()]->AddBuff(*(*buff));
+	if (!spell->is_active) {
+		//Add buff
+		for (std::list<Buff*>::iterator buff = spell->buffs.begin(); buff != spell->buffs.end(); ++buff) {
+			App->scene->dwarf->stats[(*buff)->GetStat()]->AddBuff(*(*buff));
+		}
 	}
-}
-
-void RemoveSpellBuff(Spell * spell) {
-	for (std::list<Buff*>::iterator buff = spell->buffs.begin(); buff != spell->buffs.end(); ++buff) {
-		App->scene->dwarf->stats[(*buff)->GetStat()]->RemoveBuff((*buff)->GetSource());
+	else {
+		//Remove buff
+		for (std::list<Buff*>::iterator buff = spell->buffs.begin(); buff != spell->buffs.end(); ++buff) {
+			App->scene->dwarf->stats[(*buff)->GetStat()]->RemoveBuff((*buff)->GetSource());
+		}
 	}
-	//Go through each state and call Remove_buff
+	spell->is_active = !spell->is_active;
 }

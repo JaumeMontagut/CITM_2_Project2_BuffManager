@@ -15,6 +15,9 @@
 #include "Entity_Character.h"
 #include "p2Defs.h"
 #include "p2Log.h"
+#include "Module_UI.h"
+#include "Label.h"
+#include "j1Fonts.h"
 
 Buff::Buff(BUFF_TYPE type, std::string stat, float value, uint source_id) :
 	type(type),
@@ -58,9 +61,11 @@ void Stat::AddBuff(Buff buff)
 	switch (buff.GetType())
 	{
 	case BUFF_TYPE::ADDITIVE:
+		App->buff->AddOutPutText("Added +" + std::to_string(buff.GetValue()) + " " + buff.GetStat());
 		additive_buffs.push_back(&buff);
 		break;
 	case BUFF_TYPE::MULTIPLICATIVE:
+		App->buff->AddOutPutText("Added +" + std::to_string(buff.GetValue()) + "% " + buff.GetStat());
 		multiplicative_buffs.push_back(&buff);
 		break;
 	default:
@@ -112,9 +117,20 @@ Character::Character(pugi::xml_node character_node) :
 	
 	for (pugi::xml_node iter = character_node.child("stats").child("stat"); iter; iter = iter.next_sibling("stat"))
 	{
+		std::string stat_name = iter.attribute("stat").as_string();
+
+		//Create the stat
 		stats.insert(std::pair<std::string, Stat*>(
-			iter.attribute("stat").as_string(),
+			stat_name,
 			new Stat(iter.attribute("value").as_int())));
+
+		//Create a label for the stat
+		labels.insert(std::pair<std::string, Label*>(
+			stat_name,
+			App->ui->CreateLabel(
+				{ x, y - 50 },
+				stat_name + ": " + std::to_string(stats[stat_name]->GetValue()),
+				App->ui->pixel_font_small)));
 	}
 	character_name = character_node.child("name").attribute("value").as_string();
 	max_health = curr_health = character_node.child("health").attribute("value").as_int();

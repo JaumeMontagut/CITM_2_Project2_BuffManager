@@ -13,6 +13,7 @@
 #include <map>
 
 struct SDL_Texture;
+class Label;
 
 enum class BUFF_TYPE {
 	ADDITIVE, //AKA: Flat, raw
@@ -72,6 +73,9 @@ public:
 	SDL_Rect frame = { 0, 0, 0, 0 };
 	std::string character_name = "\0";
 
+private:
+	std::map<std::string, Label*> labels;
+
 public:
 	Character(pugi::xml_node character_node);
 	bool Start() override;
@@ -108,10 +112,12 @@ class Spell : public BuffSource {
 public:
 	Spell(pugi::xml_node spell_node);
 
-	//Function pointer
-	//- Points to the function that's going to be called when the spell is executed
+	//INFO: Function pointer
+	//INFO: Points to the function that's going to be called when the spell is executed
 	void(*function_ptr)(Spell *) = nullptr;
 
+public:
+	bool is_active = false;//INFO: Used in spells which can be toggled
 	//Possible stats
 	//- Mana cost
 	//- Duration

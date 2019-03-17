@@ -27,10 +27,16 @@ j1Entity::j1Entity()
 
 bool j1Entity::Awake(pugi::xml_node & node)
 {
+	entities_node = node;
+	return true;
+}
+
+bool j1Entity::Start()
+{
 	Entity * new_entity = nullptr;
-	for (pugi::xml_node entity_node = node.child("entity"); entity_node != nullptr; entity_node = entity_node.next_sibling("entity"))
+	for (pugi::xml_node entity_node = entities_node.child("entity"); entity_node != nullptr; entity_node = entity_node.next_sibling("entity"))
 	{
-		if (std::strcmp(entity_node.attribute("type").as_string(),"character") == 0)
+		if (std::strcmp(entity_node.attribute("type").as_string(), "character") == 0)
 		{
 			new_entity = new Character(entity_node);
 			if (std::strcmp(entity_node.child("name").attribute("value").as_string(), "dwarf") == 0)
@@ -48,10 +54,6 @@ bool j1Entity::Awake(pugi::xml_node & node)
 		}
 	}
 
-	return true;
-}
-
-bool j1Entity::Start() {
 	for (std::vector<Entity*>::iterator iter = entities.begin(); iter != entities.end(); ++iter)
 	{
 		(*iter)->Start();

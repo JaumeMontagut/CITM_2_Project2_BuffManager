@@ -3,6 +3,8 @@
 
 #include "j1Module.h"
 #include <vector>
+#include "PugiXml/src/pugiconfig.hpp"
+#include "PugiXml/src/pugixml.hpp"
 
 class Entity {
 public:
@@ -24,6 +26,7 @@ public:
 
 public:
 	std::vector<Entity*> entities;
+	pugi::xml_node entities_node;
 };
 
 #endif // !__J1_ENTITY_H__

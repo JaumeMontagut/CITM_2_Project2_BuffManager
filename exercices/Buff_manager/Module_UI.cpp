@@ -40,8 +40,8 @@ bool Module_UI::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Module_UI::Start()
 {
-	pixel_font = App->font->Load("fonts/pixelart.ttf", 24);
-	pixel_font_small = App->font->Load("fonts/pixelart.ttf", 12);
+	pixel_font = App->font->Load("fonts/pixelart.ttf", 36);
+	pixel_font_small = App->font->Load("fonts/pixelart.ttf", 24);
 	return true;
 }
 
@@ -183,7 +183,7 @@ bool Module_UI::Update(float dt)
 		{
 			if ((*item) != screen)
 			{
-				LOG("Object callback failed, listener was nullptr");
+				//LOG("Object callback failed, listener was nullptr");
 			}
 
 			continue;
