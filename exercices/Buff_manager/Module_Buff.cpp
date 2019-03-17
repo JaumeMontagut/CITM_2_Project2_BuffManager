@@ -2,7 +2,7 @@
 #include <algorithm>
 #include "p2Defs.h"
 #include "p2Log.h"
-#include "Module_BuffManager.h"
+#include "Module_Buff.h"
 #include <iostream> //To be able to use "unique_ptr"
 #include "j1Render.h"
 #include "j1App.h"
@@ -167,17 +167,17 @@ void Character::RemoveItem(int source_id) {
 }
 #pragma endregion Character
 
-Module_BuffManager::Module_BuffManager() : j1Module()
+Module_Buff::Module_Buff() : j1Module()
 {
 	name.assign("buff_manager");
 }
 
-bool Module_BuffManager::Awake(pugi::xml_node & buff_manager_node)
+bool Module_Buff::Awake(pugi::xml_node & buff_manager_node)
 {
 	return true;
 }
 
-uint Module_BuffManager::GetNewSourceID()
+uint Module_Buff::GetNewSourceID()
 {
 	return last_source_id++;
 }

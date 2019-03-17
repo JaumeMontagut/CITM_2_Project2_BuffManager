@@ -18,7 +18,7 @@ class j1Scene;
 class j1Entity;
 class Module_UI;
 class j1Fonts;
-class Module_BuffManager;
+class Module_Buff;
 
 class j1App
 {
@@ -87,7 +87,7 @@ public:
 	j1Entity*			entity = nullptr;
 	Module_UI*			ui = nullptr;
 	j1Fonts*			font = nullptr;
-	Module_BuffManager* buff = nullptr;
+	Module_Buff* buff = nullptr;
 
 private:
 	std::list<j1Module*>	modules;

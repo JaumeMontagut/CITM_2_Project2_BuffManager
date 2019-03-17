@@ -89,9 +89,9 @@ public:
 //- Duration
 
 
-class Module_BuffManager : public j1Module {
+class Module_Buff : public j1Module {
 public:
-	Module_BuffManager();
+	Module_Buff();
 	bool Awake(pugi::xml_node & buff_manager_node) override;
 
 	//Button functions

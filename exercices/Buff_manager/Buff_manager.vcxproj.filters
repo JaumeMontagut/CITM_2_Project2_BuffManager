@@ -64,7 +64,7 @@
     <ClCompile Include="j1Fonts.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Module_BuffManager.cpp">
+    <ClCompile Include="Module_Buff.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
@@ -144,7 +144,7 @@
     <ClInclude Include="j1Fonts.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Module_BuffManager.h">
+    <ClInclude Include="Module_Buff.h">
       <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>

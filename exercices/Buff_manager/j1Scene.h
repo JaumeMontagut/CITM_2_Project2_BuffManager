@@ -5,7 +5,7 @@
 #include "SDL/include/SDL_rect.h"
 #include <vector>
 #include <algorithm>
-#include "Module_BuffManager.h"
+#include "Module_Buff.h"
 #include "Module_UI.h"
 
 class Button;

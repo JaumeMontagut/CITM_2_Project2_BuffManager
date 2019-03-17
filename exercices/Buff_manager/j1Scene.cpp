@@ -7,7 +7,7 @@
 #include "j1Render.h"
 #include "j1Window.h"
 #include "j1Scene.h"
-#include "Module_BuffManager.h"
+#include "Module_Buff.h"
 #include "j1Textures.h"
 #include "Module_UI.h"
 #include "Button_Input.h"
