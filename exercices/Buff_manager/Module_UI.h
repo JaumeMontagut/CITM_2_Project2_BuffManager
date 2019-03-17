@@ -83,10 +83,6 @@ public:
 
 	void SetStateToBranch(const ObjectState state, UI_Object* branch_root);
 
-	// Slider functions ----------------------------------------------------------
-	iPoint GetCursorOffset() const;
-
-	void SetCursorOffset(const iPoint offset);
 private:
 
 	bool SelectClickedObject();
@@ -112,12 +108,13 @@ private:
 	ClickState click_state = ClickState::None;
 
 public:
-	// Cursor ----------------------------------------------
-	SDL_Rect			cursor_rect;
-	iPoint				cursor_position;
-	iPoint				cursor_offset;
-	Image *				cursor = nullptr;
+	TTF_Font *			pixel_font = nullptr;
+	TTF_Font *			pixel_font_small = nullptr;
 
+	iPoint				cursor_position;
+
+	//Spell buttons
+	Button *			attack_button = nullptr;
 };
 
 

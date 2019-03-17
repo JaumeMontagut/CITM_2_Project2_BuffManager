@@ -31,7 +31,6 @@ bool j1Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool j1Scene::Start()
 {	
-	pixel_font = App->font->Load("fonts/pixelart.ttf", 24);
 	return true;
 }
 
@@ -78,7 +77,7 @@ bool j1Scene::CleanUp()
 
 bool j1Scene::OnClick(UI_Object * object)
 {
-	if (object == attack_button) {
+	if (object == App->ui->attack_button) {
 		LOG("attack button clicked");
 	}
 	return true;

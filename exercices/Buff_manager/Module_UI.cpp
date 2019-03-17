@@ -8,6 +8,7 @@
 #include "j1Input.h"
 #include "j1Audio.h"
 #include "j1Scene.h"
+#include "j1Fonts.h"
 
 // UI includes --------------------------
 #include "UI_Object.h"
@@ -39,17 +40,18 @@ bool Module_UI::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Module_UI::Start()
 {
-	cursor_rect = { 0, 165, 16, 24 };
-
 	atlas = App->tex->Load("Assets/atlas.png");
+	pixel_font = App->font->Load("fonts/pixelart.ttf", 24);
+	pixel_font_small = App->font->Load("fonts/pixelart.ttf", 12);
 
 	//App->ui->CreateLabel({ 50, 50 }, "this is a label", pixel_font, this);
 	//App->ui->CreateImage({ 50, 50 }, {0,0,16,16}, this);
-	App->scene->attack_button = App->ui->CreateButton({ 60, 605 }, { 0,0,16,16 }, App->scene);
-	App->scene->attack_button->SetLabel(
-		{ App->scene->attack_button->position.x, App->scene->attack_button->position.y + App->scene->attack_button->section.h * App->scene->attack_button->scale_factor },
+	attack_button = App->ui->CreateButton({ 60, 605 }, { 0,0,16,16 }, App->scene);
+	attack_button->SetLabel(
+		{ attack_button->position.x, attack_button->position.y + attack_button->section.h * attack_button->scale_factor },
 		"sword",
-		App->scene->pixel_font);
+		pixel_font_small);
+	//Center label
 
 	return true;
 }
@@ -81,9 +83,11 @@ bool Module_UI::CleanUp()
 bool Module_UI::PreUpdate()
 {
 	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
+	{
 		debug = !debug;
+	}
 
-	 App->input->GetMousePosition(cursor_position.x, cursor_position.y);
+	App->input->GetMousePosition(cursor_position.x, cursor_position.y);
 
 	// Hover States ============================================
 	SDL_Rect rect;
@@ -150,14 +154,14 @@ bool Module_UI::Update(float dt)
 		switch (click_state)
 		{
 		case ClickState::On:
-			SetCursorOffset(cursor_position - clicked_object->GetPosition());
+			//SetCursorOffset(cursor_position - clicked_object->GetPosition());
 			break;
 		case ClickState::Repeat:
-			clicked_object->SetPosition(cursor_position -GetCursorOffset());
+			clicked_object->SetPosition(cursor_position/* -GetCursorOffset()*/);
 			clicked_object->UpdateRelativePosition();
 			break;
 		case ClickState::Out:
-			SetCursorOffset({ 0,0 });
+			/*SetCursorOffset({ 0,0 });*/
 			break;
 		}
 	}
@@ -373,18 +377,6 @@ void Module_UI::SetStateToBranch(const ObjectState state, UI_Object * branch_roo
 	{
 		SetStateToBranch(state, (*item));
 	}
-
-}
-
-iPoint Module_UI::GetCursorOffset() const
-{
-
-	return cursor_offset;
-}
-
-void Module_UI::SetCursorOffset(const iPoint offset)
-{
-	cursor_offset = offset;
 
 }
 

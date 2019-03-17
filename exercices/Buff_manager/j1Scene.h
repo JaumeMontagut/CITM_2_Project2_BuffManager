@@ -49,10 +49,6 @@ public:
 public:
 	Character* caster = nullptr;
 	Character* target = nullptr;
-
-	TTF_Font * pixel_font = nullptr;
-
-	Button * attack_button = nullptr;
 };
 
 #endif // __j1SCENE_H__
