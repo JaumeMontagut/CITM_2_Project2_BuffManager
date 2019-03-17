@@ -26,10 +26,10 @@
       <animation>
         <frame x="3" y="11" w="28" h="19"/>
       </animation>
+      <health value ="20"/>
       <stats>
-        <health value ="20"/>
-        <attack value ="10"/>
-        <defense value ="3"/>
+        <stat stat="attack" value ="10"/>
+        <stat stat="defense" value ="3"/>
       </stats>
     </entity>
     
@@ -40,10 +40,10 @@
       <animation>
         <frame x="170" y="212" w="15" h="12"/>
       </animation>
+      <health value ="20"/>
       <stats>
-        <health value ="20"/>
-        <attack value ="10"/>
-        <defense value ="3"/>
+        <stat stat="attack" value ="10"/>
+        <stat stat="defense" value ="3"/>
       </stats>
     </entity>
     

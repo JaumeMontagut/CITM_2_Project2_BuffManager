@@ -10,6 +10,7 @@
 #include "SDL/include/SDL_rect.h"
 #include "j1Entity.h"
 #include <string.h>
+#include <map>
 
 struct SDL_Texture;
 
@@ -28,12 +29,12 @@ enum class STAT_TYPE {
 class Buff {
 private:
 	BUFF_TYPE type = BUFF_TYPE::MAX;
-	STAT_TYPE stat = STAT_TYPE::MAX;
+	std::string stat = "\0";
 	float value = 0.0f;
 	uint source_id = 0;//ID from which modifier (object, spell, etc) the buff came from
 
 public:
-	Buff(BUFF_TYPE type, STAT_TYPE stat, float value, uint source_id);
+	Buff(BUFF_TYPE type, std::string stat, float value, uint source_id);
 	BUFF_TYPE GetType();
 	int GetValue();
 	uint GetSource();
@@ -64,7 +65,7 @@ private:
 	int curr_health;
 	int max_health;
 
-	std::vector<Stat*> stats;
+	std::map<std::string, Stat*> stats;
 
 	std::string tex_path = "\0";
 	SDL_Texture * tex = nullptr;

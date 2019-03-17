@@ -68,25 +68,10 @@ BUFF_TYPE Module_Buff::GetBuffType(std::string buff_type)
 	}
 }
 
-STAT_TYPE Module_Buff::GetStatType(std::string stat_type)
-{
-	if (std::strcmp(stat_type.c_str(), "attack") == 0) {
-		return STAT_TYPE::ATTACK;
-	}
-	else if (std::strcmp(stat_type.c_str(), "defense") == 0) {
-		return STAT_TYPE::DEFENSE;
-	}
-	else {
-		LOG("Stat type not found.");
-	}
-}
-
 bool Module_Buff::OnClick(UI_Object * object)
 {
 	if (object == attack_button) {
-		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
-			App->scene->caster->DealDamage(App->scene->target);
-		}
+		App->scene->caster->DealDamage(App->scene->target);
 		LOG("attack button clicked");
 	}
 

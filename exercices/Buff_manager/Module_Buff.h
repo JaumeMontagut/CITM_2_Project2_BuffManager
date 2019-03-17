@@ -20,8 +20,6 @@ public:
 
 	uint GetNewSourceID();
 	BUFF_TYPE GetBuffType(std::string);
-	STAT_TYPE GetStatType(std::string);
-
 
 	//Button functions
 	//virtual bool OnHover(UI_Object* object) { return true; }

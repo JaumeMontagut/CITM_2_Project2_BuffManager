@@ -16,7 +16,7 @@
 #include "p2Defs.h"
 #include "p2Log.h"
 
-Buff::Buff(BUFF_TYPE type, STAT_TYPE stat, float value, uint source_id) :
+Buff::Buff(BUFF_TYPE type, std::string stat, float value, uint source_id) :
 	type(type),
 	stat(stat),
 	value(value),
@@ -109,11 +109,14 @@ int Stat::GetValue()
 Character::Character(pugi::xml_node character_node) :
 	Entity(character_node.attribute("x").as_int(), character_node.attribute("y").as_int())
 {
-	std::vector<Stat*>::iterator stat = stats.begin();
-	for (int stat_num = 0; stat + stat_num != stats.end(); ++stat_num) {
-		(*(stat + stat_num)) = new Stat(GetStatBaseValue((STAT_TYPE)stat_num, character_node.child("stats")));
+	
+	for (pugi::xml_node iter = character_node.child("stats").child("stat"); iter; iter = iter.next_sibling("stat"))
+	{
+		stats.insert(std::pair<std::string, Stat*>(
+			iter.attribute("stat").as_string(),
+			new Stat(iter.attribute("value").as_int())));
 	}
-	max_health = curr_health = character_node.child("stats").child("health").attribute("value").as_int();
+	max_health = curr_health = character_node.child("health").attribute("value").as_int();
 	tex_path = character_node.child("spritesheet").attribute("path").as_string();
 	frame = { character_node.child("animation").child("frame").attribute("x").as_int(),
 				character_node.child("animation").child("frame").attribute("y").as_int(),
@@ -140,7 +143,7 @@ bool Character::Update(float dt)
 
 void Character::DealDamage(Character * reciever)
 {
-	int damage = stats[(int)STAT_TYPE::ATTACK]->GetValue() - reciever->stats[(int)STAT_TYPE::DEFENSE]->GetValue();
+	int damage = stats["attack"]->GetValue() - reciever->stats["defense"]->GetValue();
 	if (damage > 0)
 	{
 		reciever->curr_health -= damage;
@@ -178,7 +181,7 @@ BuffSource::BuffSource(pugi::xml_node source_node)
 	{
 		buffs.push_back(new Buff(
 			App->buff->GetBuffType(iter.attribute("type").as_string()),
-			App->buff->GetStatType(iter.attribute("stat").as_string()),
+			iter.attribute("stat").as_string(),
 			iter.attribute("value").as_int(),
 			source_id));
 	}
