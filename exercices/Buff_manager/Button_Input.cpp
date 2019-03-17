@@ -29,7 +29,7 @@ Button::~Button()
 
 bool Button::Draw()
 {
-	App->render->BlitUI(texture, position.x, position.y, 1, &rect, false, 0.0f);
+	App->render->BlitUI(texture, position.x, position.y, 2, &rect, false, 0.0f);
 	return true;
 }
 

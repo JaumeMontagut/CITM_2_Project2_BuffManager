@@ -43,6 +43,10 @@ bool Module_UI::Start()
 
 	atlas = App->tex->Load("Assets/atlas.png");
 
+	//App->ui->CreateLabel({ 50, 50 }, "this is a label", pixel_font, this);
+	//App->ui->CreateImage({ 50, 50 }, {0,0,16,16}, this);
+	App->scene->attack_button = App->ui->CreateButton({ 50, 50 }, { 0,0,16,16 }, App->scene);
+
 	return true;
 }
 
@@ -89,10 +93,10 @@ bool Module_UI::PreUpdate()
 
 		rect.x = (*item)->position.x / App->win->GetScale();
 		rect.y = (*item)->position.y / App->win->GetScale();
-		rect.w = (*item)->section.w / App->win->GetScale();
-		rect.h = (*item)->section.h / App->win->GetScale();
+		rect.w = ((*item)->section.w / App->win->GetScale()) * 2;
+		rect.h = ((*item)->section.h / App->win->GetScale()) * 2;
 
-		if (cursor_position.x > rect.x && cursor_position.x < rect.x + rect.w && cursor_position.y > rect.y && cursor_position.y < rect.y + rect.h)
+		if (cursor_position.x >= rect.x && cursor_position.x <= rect.x + rect.w && cursor_position.y >= rect.y && cursor_position.y <= rect.y + rect.h)
 		{
 			if ((*item)->hover_state == HoverState::None)
 				(*item)->hover_state = HoverState::On;

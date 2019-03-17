@@ -32,11 +32,6 @@ bool j1Scene::Awake(pugi::xml_node& config)
 bool j1Scene::Start()
 {	
 	pixel_font = App->font->Load("fonts/pixelart.ttf", 24);
-
-	//App->ui->CreateLabel({ 50, 50 }, "this is a label", pixel_font, this);
-	//App->ui->CreateImage({ 50, 50 }, {0,0,16,16}, this);
-	attack_button = App->ui->CreateButton({ 50, 50 }, { 0,0,16,16 }, this);
-
 	return true;
 }
 
