@@ -52,10 +52,10 @@
   <buff>
     <spell name="rage">
       <img>
-        <atlas_position row ="1" column="1"/>
+        <atlas_pos row ="1" column="1"/>
       </img>
       <buff stat  ="attack" value ="3" type ="additive"/>
-      <buff stat ="defense" value="3" type="addtitive"/>
+      <buff stat ="defense" value="3" type="additive"/>
     </spell>
     <!--
     <item name = "sword">

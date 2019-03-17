@@ -13,9 +13,12 @@
 #include "j1Entity.h"
 #include "j1Module.h"
 #include "Entity_Character.h"
+#include "p2Defs.h"
+#include "p2Log.h"
 
-Buff::Buff(BUFF_TYPE type, float value, uint source_id) :
+Buff::Buff(BUFF_TYPE type, STAT_TYPE stat, float value, uint source_id) :
 	type(type),
+	stat(stat),
 	value(value),
 	source_id(source_id)
 {
@@ -166,4 +169,22 @@ int Character::GetStatBaseValue(STAT_TYPE stat, pugi::xml_node stats_node)
 		LOG("Stat type not found.");
 		return 0;
 	}
+}
+
+BuffSource::BuffSource(pugi::xml_node source_node)
+{
+	source_id = App->buff->GetNewSourceID();
+	for (pugi::xml_node iter = source_node.child("buff"); iter; iter = iter.next_sibling("buff"))
+	{
+		buffs.push_back(new Buff(
+			App->buff->GetBuffType(iter.attribute("type").as_string()),
+			App->buff->GetStatType(iter.attribute("stat").as_string()),
+			iter.attribute("value").as_int(),
+			source_id));
+	}
+}
+
+Spell::Spell(pugi::xml_node spell_node) : BuffSource(spell_node)
+{
+
 }

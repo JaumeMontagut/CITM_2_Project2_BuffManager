@@ -17,6 +17,8 @@
 #include "Module_UI.h"
 #include "Button_Input.h"
 #include "Label.h"
+#include "j1Input.h"
+#include "j1Scene.h"
 
 Module_Buff::Module_Buff() : j1Module()
 {
@@ -30,9 +32,9 @@ bool Module_Buff::Awake(pugi::xml_node & buff_node)
 }
 
 bool Module_Buff::Start() {
-	for (pugi::xml_node iter = buff_node.child("spell"); iter; iter = iter.next_sibling("spell"))
+	for (pugi::xml_node spell_node = buff_node.child("spell"); spell_node; spell_node = spell_node.next_sibling("spell"))
 	{
-
+		spells.push_back(new Spell(spell_node));
 	}
 
 	//App->ui->CreateLabel({ 50, 50 }, "this is a label", pixel_font, this);
@@ -53,9 +55,38 @@ uint Module_Buff::GetNewSourceID()
 	return last_source_id++;
 }
 
+BUFF_TYPE Module_Buff::GetBuffType(std::string buff_type)
+{
+	if (std::strcmp(buff_type.c_str(), "additive") == 0) {
+		return BUFF_TYPE::ADDITIVE;
+	}
+	else if (std::strcmp(buff_type.c_str(), "multiplicative") == 0) {
+		return BUFF_TYPE::MULTIPLICATIVE;
+	}
+	else {
+		LOG("Buff type not found.");
+	}
+}
+
+STAT_TYPE Module_Buff::GetStatType(std::string stat_type)
+{
+	if (std::strcmp(stat_type.c_str(), "attack") == 0) {
+		return STAT_TYPE::ATTACK;
+	}
+	else if (std::strcmp(stat_type.c_str(), "defense") == 0) {
+		return STAT_TYPE::DEFENSE;
+	}
+	else {
+		LOG("Stat type not found.");
+	}
+}
+
 bool Module_Buff::OnClick(UI_Object * object)
 {
 	if (object == attack_button) {
+		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
+			App->scene->caster->DealDamage(App->scene->target);
+		}
 		LOG("attack button clicked");
 	}
 

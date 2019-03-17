@@ -16,6 +16,7 @@ struct SDL_Texture;
 enum class BUFF_TYPE {
 	ADDITIVE, //AKA: Flat, raw
 	MULTIPLICATIVE, // AKA: Percent
+	MAX
 };
 
 enum class STAT_TYPE {
@@ -26,12 +27,13 @@ enum class STAT_TYPE {
 
 class Buff {
 private:
-	BUFF_TYPE type;
-	float value;
-	uint source_id;//ID from which modifier (object, spell, etc) the buff came from
+	BUFF_TYPE type = BUFF_TYPE::MAX;
+	STAT_TYPE stat = STAT_TYPE::MAX;
+	float value = 0.0f;
+	uint source_id = 0;//ID from which modifier (object, spell, etc) the buff came from
 
 public:
-	Buff(BUFF_TYPE type, float value, uint source_id);
+	Buff(BUFF_TYPE type, STAT_TYPE stat, float value, uint source_id);
 	BUFF_TYPE GetType();
 	int GetValue();
 	uint GetSource();
@@ -96,11 +98,17 @@ private:
 //- Duration
 
 class BuffSource {
+public:
+	BuffSource(pugi::xml_node buff_source_node);
+
+private:
 	uint source_id;
-	std::list<Buff> buffs;
+	std::list<Buff*> buffs;
 };
 
 class Spell : public BuffSource {
+public:
+	Spell(pugi::xml_node spell_node);
 	//Possible stats
 	//- Mana cost
 	//- Duration

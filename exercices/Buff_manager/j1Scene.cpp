@@ -43,12 +43,6 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-	//Attack when player presses 1
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
-		caster->DealDamage(target);
-	}
-
-
 	//Draw background
 	uint w, h;
 	App->win->GetWindowSize(w, h);
