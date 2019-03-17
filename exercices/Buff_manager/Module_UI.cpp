@@ -335,22 +335,22 @@ bool Module_UI::DeleteObject(UI_Object * object)
 
 	if ((*object_to_delete)->anchor_parent != nullptr)
 	{
-		list<UI_Object*> *sons_list = (*object_to_delete)->anchor_parent->GetAnchorSons();
-		list<UI_Object*>::iterator item = sons_list->begin();
+		//list<UI_Object*> *sons_list = (*object_to_delete)->anchor_parent->GetAnchorSons();
+		//list<UI_Object*>::iterator item = sons_list->begin();
 
-		while ((*item) != nullptr)
-		{
-			if (object == (*item))
-			{
-				list<UI_Object*>::iterator iterator = ++item;
-				sons_list->erase(item);
-				item = iterator;
-			}
-			else
-			{
-				++item;
-			}
-		}
+		//while ((*item) != nullptr)
+		//{
+		//	if (object == (*item))
+		//	{
+		//		list<UI_Object*>::iterator iterator = ++item;
+		//		sons_list->erase(item);
+		//		item = iterator;
+		//	}
+		//	else
+		//	{
+		//		++item;
+		//	}
+		//}
 	}
 
 	LOG("UI Object deleted");
