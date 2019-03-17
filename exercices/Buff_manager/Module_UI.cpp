@@ -40,21 +40,8 @@ bool Module_UI::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Module_UI::Start()
 {
-	atlas = App->tex->Load("Assets/atlas.png");
 	pixel_font = App->font->Load("fonts/pixelart.ttf", 24);
 	pixel_font_small = App->font->Load("fonts/pixelart.ttf", 12);
-
-	//App->ui->CreateLabel({ 50, 50 }, "this is a label", pixel_font, this);
-	//App->ui->CreateImage({ 50, 50 }, {0,0,16,16}, this);
-	attack_button = App->ui->CreateButton({ 60, 605 }, { 0,0,16,16 }, App->scene);
-	attack_button->SetLabel(
-		{ attack_button->position.x, attack_button->position.y + attack_button->section.h * attack_button->scale_factor },
-		"sword",
-		pixel_font_small);
-	//Center label (button center - label half width)
-	attack_button->label->position.x = (attack_button->position.x + attack_button->section.w * attack_button->scale_factor * 0.5f) - (attack_button->label->section.w * 0.5f);
-
-
 	return true;
 }
 

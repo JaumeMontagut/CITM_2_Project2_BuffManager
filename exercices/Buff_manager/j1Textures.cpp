@@ -3,6 +3,7 @@
 #include "j1App.h"
 #include "j1Render.h"
 #include "j1Textures.h"
+#include "Module_UI.h"
 
 #include "SDL_image/include/SDL_image.h"
 #pragma comment( lib, "SDL_image/libx86/SDL2_image.lib" )
@@ -39,6 +40,9 @@ bool j1Textures::Start()
 {
 	LOG("start textures");
 	bool ret = true;
+
+	App->ui->atlas = Load("Assets/atlas.png");
+
 	return ret;
 }
 

@@ -59,14 +59,17 @@ public:
 
 	void SetState(const ObjectState state);
 
+public:
+	iPoint                position = { 0, 0 };
+	SDL_Rect			  section = { 0, 0, 0, 0 };
+	int					  scale_factor = 1;
+
 protected:
 
-	iPoint                position = {0, 0};
+	
 	iPoint                relative_position = { 0, 0 };
-	SDL_Rect			  section = {0, 0, 0, 0};
 	SDL_Texture         * texture = nullptr;
 	Gui_Listener        * listener = nullptr;
-	int					  scale_factor = 1;
 
 	// Anchors =========================================
 	UI_Object           * anchor_parent = nullptr;

@@ -67,6 +67,9 @@
     <ClCompile Include="Module_Buff.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Entity_Character.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1App.h">
@@ -147,6 +150,9 @@
     <ClInclude Include="Module_Buff.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Entity_Character.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Tools">
@@ -157,6 +163,9 @@
     </Filter>
     <Filter Include="Modules\UI">
       <UniqueIdentifier>{bec718be-4d39-4ae2-b17b-b3a55f501a32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{5fdedc6b-85af-4e66-b91a-6bae3a0ec05f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

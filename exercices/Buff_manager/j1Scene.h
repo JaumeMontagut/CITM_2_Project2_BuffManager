@@ -7,6 +7,7 @@
 #include <algorithm>
 #include "Module_Buff.h"
 #include "Module_UI.h"
+#include "Entity_Character.h"
 
 class Button;
 struct SDL_Texture;
@@ -37,14 +38,6 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
-
-	//virtual bool OnHover(UI_Object* object) { return true; }
-	//virtual bool RepeatHover(UI_Object* object) { return true; }
-	//virtual bool OutHover(UI_Object* object) { return true; }
-
-	virtual bool OnClick(UI_Object* object);
-	//virtual bool RepeatClick(UI_Object* object) { return true; }
-	//virtual bool OutClick(UI_Object* object) { return true; }
 
 public:
 	Character* caster = nullptr;

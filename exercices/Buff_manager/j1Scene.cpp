@@ -74,11 +74,3 @@ bool j1Scene::CleanUp()
 	LOG("Freeing scene");
 	return true;
 }
-
-bool j1Scene::OnClick(UI_Object * object)
-{
-	if (object == App->ui->attack_button) {
-		LOG("attack button clicked");
-	}
-	return true;
-}

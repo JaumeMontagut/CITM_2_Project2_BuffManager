@@ -91,12 +91,18 @@ private:
 
 	void UpdateGuiPositions(UI_Object* object, iPoint cumulated_position);
 
+public:
+	// Atlas Texture ---------------------------------------
+	SDL_Texture*		atlas = nullptr;
+
+	TTF_Font *			pixel_font = nullptr;
+	TTF_Font *			pixel_font_small = nullptr;
+
+	iPoint				cursor_position;
+
 private:
 
 	bool debug = false;
-
-	// Atlas Texture ---------------------------------------
-	SDL_Texture* atlas;
 
 	// Objects ---------------------------------------------
 	list<UI_Object*> objects_list;
@@ -106,15 +112,6 @@ private:
 	UI_Object* clicked_object = nullptr;
 
 	ClickState click_state = ClickState::None;
-
-public:
-	TTF_Font *			pixel_font = nullptr;
-	TTF_Font *			pixel_font_small = nullptr;
-
-	iPoint				cursor_position;
-
-	//Spell buttons
-	Button *			attack_button = nullptr;
 };
 
 
