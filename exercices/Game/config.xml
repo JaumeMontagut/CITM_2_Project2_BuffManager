@@ -50,17 +50,20 @@
   </entity>
 
   <buff>
+    <spell name="cut">
+      <function name="cut"/>
+      <atlas_icon row ="0" column="0"/>
+    </spell>
+
+    <!--
     <spell name="rage">
+      <function name="add_bonus"/>
       <atlas_icon row ="0" column="4"/>
       <buff stat  ="attack" value ="3" type ="additive"/>
       <buff stat ="defense" value="3" type="additive"/>
     </spell>
-    <!--
-    <item name = "sword">
-      <buff stat ="attack" value="3" type="additive"/>
-      <buff stat ="defense" value="3" type="addtitive"/>
-    </item>
     -->
+    
   </buff>
 
 </config>

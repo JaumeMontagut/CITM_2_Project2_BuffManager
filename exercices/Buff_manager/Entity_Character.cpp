@@ -141,28 +141,6 @@ bool Character::Update(float dt)
 	return true;
 }
 
-
-void Character::DealDamage(Character * reciever)
-{
-	if (reciever->alive) {
-		int damage = stats["attack"]->GetValue() - reciever->stats["defense"]->GetValue();
-		if (damage > 0)
-		{
-			reciever->curr_health -= damage;
-			App->buff->AddOutPutText(character_name + " dealt " + std::to_string(damage) + " damage to " + reciever->character_name);
-			if (reciever->curr_health <= 0 && reciever->alive)
-			{
-				reciever->alive = false;
-				reciever->curr_health = 0;
-				App->buff->AddOutPutText("died");//TO IMPROVE: Add character names
-			}
-		}
-	}
-	else {
-		App->buff->AddOutPutText("it's already dead...");
-	}
-}
-
 void Character::AddBuff() {
 }
 
@@ -198,5 +176,5 @@ BuffSource::BuffSource(pugi::xml_node source_node)
 
 Spell::Spell(pugi::xml_node spell_node) : BuffSource(spell_node)
 {
-
+	function_ptr = App->buff->GetFunctionPointer(spell_node.child("function").attribute("name").as_string());
 }

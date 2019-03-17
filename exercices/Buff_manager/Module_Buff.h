@@ -23,6 +23,10 @@ public:
 	uint GetNewSourceID();
 	BUFF_TYPE GetBuffType(std::string);
 
+	//Function pointers
+	void FillFunctionsMap();
+	void(*(GetFunctionPointer)(std::string function_name))(Spell *);
+
 	//Button functions
 	//virtual bool OnHover(UI_Object* object) { return true; }
 	//virtual bool RepeatHover(UI_Object* object) { return true; }
@@ -38,6 +42,11 @@ private:
 	std::vector<Spell*> spells;
 	std::vector<Button *> spell_buttons;
 	std::list<Label*> output_Texts;
+
+	std::map<std::string, void(*)(Spell*)> spell_functions;
 };
+
+//Spell functions
+void Cut(Spell * spell);
 
 #endif

@@ -35,11 +35,11 @@ bool j1Entity::Awake(pugi::xml_node & node)
 			new_entity = new Character(entity_node);
 			if (std::strcmp(entity_node.child("name").attribute("value").as_string(), "dwarf") == 0)
 			{
-				App->scene->caster = (Character*)new_entity;
+				App->scene->dwarf = (Character*)new_entity;
 			}
 			else if (std::strcmp(entity_node.child("name").attribute("value").as_string(), "goblin") == 0)
 			{
-				App->scene->target = (Character*)new_entity;
+				App->scene->goblin = (Character*)new_entity;
 			}
 			entities.push_back(new_entity);
 		}

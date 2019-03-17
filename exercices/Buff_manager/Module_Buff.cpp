@@ -19,6 +19,7 @@
 #include "Label.h"
 #include "j1Input.h"
 #include "j1Scene.h"
+#include "Entity_Character.h"
 
 Module_Buff::Module_Buff() : j1Module()
 {
@@ -28,6 +29,7 @@ Module_Buff::Module_Buff() : j1Module()
 bool Module_Buff::Awake(pugi::xml_node & buff_node)
 {
 	this->buff_node = buff_node;
+	FillFunctionsMap();
 	return true;
 }
 
@@ -73,15 +75,22 @@ BUFF_TYPE Module_Buff::GetBuffType(std::string buff_type)
 	}
 }
 
+void Module_Buff::FillFunctionsMap()
+{
+	spell_functions["cut"] = &Cut;
+}
+
+void(*Module_Buff::GetFunctionPointer(std::string functionName))(Spell *) {
+	return spell_functions[functionName];
+}
+
 bool Module_Buff::OnClick(UI_Object * object)
 {
 	for (int i = 0; i < spell_buttons.size(); ++i)
 	{
 		if (spell_buttons[i] == object)
 		{
-			//TO IMPROVE: When it's the first element
-			//TO IMPROVE: Call the function pointer
-			App->scene->caster->DealDamage(App->scene->target);
+			spells[i]->function_ptr(spells[i]);
 		}
 	}
 	return true;
@@ -101,5 +110,26 @@ void Module_Buff::AddOutPutText(std::string text)
 	{
 		App->ui->DeleteObject((UI_Object*)*output_Texts.begin());
 		output_Texts.pop_front();
+	}
+}
+
+void Cut(Spell * spell)
+{
+	if (App->scene->goblin->alive) {
+		int damage = App->scene->dwarf->stats["attack"]->GetValue() - App->scene->goblin->stats["defense"]->GetValue();
+		if (damage > 0)
+		{
+			App->scene->goblin->curr_health -= damage;
+			App->buff->AddOutPutText(App->scene->dwarf->character_name + " dealt " + std::to_string(damage) + " damage to " + App->scene->goblin->character_name + ".");
+			if (App->scene->goblin->curr_health <= 0 && App->scene->goblin->alive)
+			{
+				App->scene->goblin->alive = false;
+				App->scene->goblin->curr_health = 0;
+				App->buff->AddOutPutText(App->scene->goblin->character_name + " died.");//TO IMPROVE: Add character names
+			}
+		}
+	}
+	else {
+		App->buff->AddOutPutText("it's already dead...");
 	}
 }

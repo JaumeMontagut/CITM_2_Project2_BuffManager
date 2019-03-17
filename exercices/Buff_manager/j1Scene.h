@@ -40,8 +40,8 @@ public:
 	bool CleanUp();
 
 public:
-	Character* caster = nullptr;
-	Character* target = nullptr;
+	Character* dwarf = nullptr;
+	Character* goblin = nullptr;
 };
 
 #endif // __j1SCENE_H__

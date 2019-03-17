@@ -61,24 +61,21 @@ public:
 
 class Character : public Entity
 {
-private:
+public:
 	int curr_health;
-	int max_health;
-
+	bool alive = true;
 	std::map<std::string, Stat*> stats;
-
+	int max_health;
 	std::string tex_path = "\0";
 	SDL_Texture * tex = nullptr;
 	SDL_Rect frame = { 0, 0, 0, 0 };
 	std::string character_name = "\0";
-	bool alive = true;
 
 public:
 	Character(pugi::xml_node character_node);
 	bool Start() override;
 	bool Update(float dt) override;
 
-	void DealDamage(Character * reciever);
 	void AddBuff();
 	void RemoveItem(int source_id);
 
@@ -112,6 +109,11 @@ private:
 class Spell : public BuffSource {
 public:
 	Spell(pugi::xml_node spell_node);
+
+	//Function pointer
+	//- Points to the function that's going to be called when the spell is executed
+	void(*function_ptr)(Spell *) = nullptr;
+
 	//Possible stats
 	//- Mana cost
 	//- Duration
