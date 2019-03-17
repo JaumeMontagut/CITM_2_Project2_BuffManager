@@ -51,7 +51,7 @@
 
   <buff>
     <spell name="rage">
-      <atlas_icon row ="1" column="1"/>
+      <atlas_icon row ="0" column="4"/>
       <buff stat  ="attack" value ="3" type ="additive"/>
       <buff stat ="defense" value="3" type="additive"/>
     </spell>

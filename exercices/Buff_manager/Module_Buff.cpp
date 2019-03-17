@@ -42,7 +42,7 @@ bool Module_Buff::Start() {
 		//Create a button for the spell
 		new_button = App->ui->CreateButton(
 			{ 60, 605 },
-			{ 16 * spell_node.child("atlas_icon").attribute("row").as_int(), 16 * spell_node.child("atlas_icon").attribute("column").as_int(), 16, 16 },
+			{ 16 * spell_node.child("atlas_icon").attribute("column").as_int(), 16 * spell_node.child("atlas_icon").attribute("row").as_int(), 16, 16 },
 			App->buff);
 		new_button->SetLabel(
 			{ new_button->position.x, new_button->position.y + new_button->section.h * new_button->scale_factor },
