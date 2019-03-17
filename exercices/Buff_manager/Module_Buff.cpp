@@ -32,21 +32,26 @@ bool Module_Buff::Awake(pugi::xml_node & buff_node)
 }
 
 bool Module_Buff::Start() {
+	Button * new_button = nullptr;
 	for (pugi::xml_node spell_node = buff_node.child("spell"); spell_node; spell_node = spell_node.next_sibling("spell"))
 	{
+		//Create the spell
 		spells.push_back(new Spell(spell_node));
+
+		//TO IMPROVE: Set position dynamically
+		//Create a button for the spell
+		new_button = App->ui->CreateButton(
+			{ 60, 605 },
+			{ 16 * spell_node.child("atlas_icon").attribute("row").as_int(), 16 * spell_node.child("atlas_icon").attribute("column").as_int(), 16, 16 },
+			App->buff);
+		new_button->SetLabel(
+			{ new_button->position.x, new_button->position.y + new_button->section.h * new_button->scale_factor },
+			spell_node.attribute("name").as_string(),
+			App->ui->pixel_font_small);
+		//TO IMPROVE: Center label (button center - label half width)
+		//new_button->label->position.x = (attack_button->position.x + attack_button->section.w * attack_button->scale_factor * 0.5f) - (attack_button->label->section.w * 0.5f);
+		spell_buttons.push_back(new_button);
 	}
-
-	//App->ui->CreateLabel({ 50, 50 }, "this is a label", pixel_font, this);
-	//App->ui->CreateImage({ 50, 50 }, {0,0,16,16}, this);
-	attack_button = App->ui->CreateButton({ 60, 605 }, { 0,0,16,16 }, App->buff);
-	attack_button->SetLabel(
-		{ attack_button->position.x, attack_button->position.y + attack_button->section.h * attack_button->scale_factor },
-		"sword",
-		App->ui->pixel_font_small);
-	//Center label (button center - label half width)
-	attack_button->label->position.x = (attack_button->position.x + attack_button->section.w * attack_button->scale_factor * 0.5f) - (attack_button->label->section.w * 0.5f);
-
 	return true;
 }
 
@@ -70,10 +75,15 @@ BUFF_TYPE Module_Buff::GetBuffType(std::string buff_type)
 
 bool Module_Buff::OnClick(UI_Object * object)
 {
-	if (object == attack_button) {
-		App->scene->caster->DealDamage(App->scene->target);
+	for (int i = 0; i < spell_buttons.size(); ++i)
+	{
+		if (spell_buttons[i] == object)
+		{
+			//TO IMPROVE: When it's the first element
+			//TO IMPROVE: Call the function pointer
+			App->scene->caster->DealDamage(App->scene->target);
+		}
 	}
-
 	return true;
 }
 

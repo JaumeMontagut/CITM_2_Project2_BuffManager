@@ -33,13 +33,10 @@ public:
 
 private:
 	uint last_source_id = 0u;
-
 	pugi::xml_node buff_node;
 
-	std::list<Spell*> spells;
-
-	//UI
-	Button *			attack_button = nullptr;
+	std::vector<Spell*> spells;
+	std::vector<Button *> spell_buttons;
 	std::list<Label*> output_Texts;
 };
 

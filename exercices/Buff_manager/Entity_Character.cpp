@@ -116,6 +116,7 @@ Character::Character(pugi::xml_node character_node) :
 			iter.attribute("stat").as_string(),
 			new Stat(iter.attribute("value").as_int())));
 	}
+	character_name = character_node.child("name").attribute("value").as_string();
 	max_health = curr_health = character_node.child("health").attribute("value").as_int();
 	tex_path = character_node.child("spritesheet").attribute("path").as_string();
 	frame = { character_node.child("animation").child("frame").attribute("x").as_int(),
@@ -143,17 +144,23 @@ bool Character::Update(float dt)
 
 void Character::DealDamage(Character * reciever)
 {
-	int damage = stats["attack"]->GetValue() - reciever->stats["defense"]->GetValue();
-	if (damage > 0)
-	{
-		reciever->curr_health -= damage;
-		if (reciever->curr_health <= 0)
+	if (reciever->alive) {
+		int damage = stats["attack"]->GetValue() - reciever->stats["defense"]->GetValue();
+		if (damage > 0)
 		{
-			reciever->curr_health = 0;
-			//Die
+			reciever->curr_health -= damage;
+			App->buff->AddOutPutText(character_name + " dealt " + std::to_string(damage) + " damage to " + reciever->character_name);
+			if (reciever->curr_health <= 0 && reciever->alive)
+			{
+				reciever->alive = false;
+				reciever->curr_health = 0;
+				App->buff->AddOutPutText("died");//TO IMPROVE: Add character names
+			}
 		}
 	}
-	App->buff->AddOutPutText("attack button clicked");
+	else {
+		App->buff->AddOutPutText("it's already dead...");
+	}
 }
 
 void Character::AddBuff() {

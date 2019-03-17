@@ -70,6 +70,8 @@ private:
 	std::string tex_path = "\0";
 	SDL_Texture * tex = nullptr;
 	SDL_Rect frame = { 0, 0, 0, 0 };
+	std::string character_name = "\0";
+	bool alive = true;
 
 public:
 	Character(pugi::xml_node character_node);

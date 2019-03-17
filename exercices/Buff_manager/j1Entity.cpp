@@ -3,7 +3,7 @@
 #include "PugiXml/src/pugiconfig.hpp"
 #include "PugiXml/src/pugixml.hpp"
 #include "p2Log.h"
-#include "Module_BuffManager.h"
+#include "Module_Buff.h"
 #include "j1App.h"
 #include "j1Scene.h"
 
@@ -33,11 +33,11 @@ bool j1Entity::Awake(pugi::xml_node & node)
 		if (std::strcmp(entity_node.attribute("type").as_string(),"character") == 0)
 		{
 			new_entity = new Character(entity_node);
-			if (std::strcmp(entity_node.child("name").attribute("value").as_string(), "caster") == 0)
+			if (std::strcmp(entity_node.child("name").attribute("value").as_string(), "dwarf") == 0)
 			{
 				App->scene->caster = (Character*)new_entity;
 			}
-			else if (std::strcmp(entity_node.child("name").attribute("value").as_string(), "target") == 0)
+			else if (std::strcmp(entity_node.child("name").attribute("value").as_string(), "goblin") == 0)
 			{
 				App->scene->target = (Character*)new_entity;
 			}

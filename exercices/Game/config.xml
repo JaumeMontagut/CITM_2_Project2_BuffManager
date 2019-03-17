@@ -20,7 +20,7 @@
   <entity>
     
     <entity type ="character" x="40" y="119">
-      <name value="caster"/>
+      <name value="dwarf"/>
       <pos x ="0" y="0"/>
       <spritesheet path="Assets/Dwarf_Sprite_Sheet1.2v.png"/>
       <animation>
@@ -34,7 +34,7 @@
     </entity>
     
     <entity type ="character" x="100" y="119">
-      <name value="target"/>
+      <name value="goblin"/>
       <pos x ="0" y="0"/>
       <spritesheet path="Assets/Imp Sprite Sheet.png"/>
       <animation>
@@ -51,9 +51,7 @@
 
   <buff>
     <spell name="rage">
-      <img>
-        <atlas_pos row ="1" column="1"/>
-      </img>
+      <atlas_icon row ="1" column="1"/>
       <buff stat  ="attack" value ="3" type ="additive"/>
       <buff stat ="defense" value="3" type="additive"/>
     </spell>
