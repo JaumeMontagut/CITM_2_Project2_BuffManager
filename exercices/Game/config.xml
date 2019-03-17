@@ -65,7 +65,7 @@
     <spell name="ilumination">
       <function name="add_buff"/>
       <atlas_icon row ="3" column="3"/>
-      <buff stat  ="attack" value ="50" type ="multiplicative"/>
+      <buff stat  ="attack" value ="0.5" type ="multiplicative"/>
     </spell>
     
   </buff>

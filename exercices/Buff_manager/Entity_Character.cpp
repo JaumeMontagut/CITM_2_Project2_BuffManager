@@ -65,7 +65,7 @@ void Stat::AddBuff(Buff & buff)
 		additive_buffs.push_back(&buff);
 		break;
 	case BUFF_TYPE::MULTIPLICATIVE:
-		App->buff->AddOutPutText("Added +" + std::to_string((int)buff.GetValue()) + "% " + buff.GetStat());
+		App->buff->AddOutPutText("Added +" + std::to_string((int)(buff.GetValue()*100)) + "% " + buff.GetStat());
 		multiplicative_buffs.push_back(&buff);
 		break;
 	default:
@@ -216,7 +216,7 @@ BuffSource::BuffSource(pugi::xml_node source_node)
 		buffs.push_back(new Buff(
 			App->buff->GetBuffType(iter.attribute("type").as_string()),
 			iter.attribute("stat").as_string(),
-			iter.attribute("value").as_int(),
+			iter.attribute("value").as_float(),
 			source_id));
 	}
 }
