@@ -3,7 +3,7 @@
 #include "PugiXml/src/pugiconfig.hpp"
 #include "PugiXml/src/pugixml.hpp"
 #include "p2Log.h"
-#include "BuffManager.h"
+#include "Module_BuffManager.h"
 #include "j1App.h"
 #include "j1Scene.h"
 

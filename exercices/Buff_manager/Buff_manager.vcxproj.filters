@@ -34,9 +34,6 @@
     <ClCompile Include="PugiXml\src\pugixml.cpp">
       <Filter>Tools</Filter>
     </ClCompile>
-    <ClCompile Include="BuffManager.cpp">
-      <Filter>Tools</Filter>
-    </ClCompile>
     <ClCompile Include="j1Entity.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
@@ -65,6 +62,9 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="j1Fonts.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Module_BuffManager.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
@@ -114,9 +114,6 @@
     <ClInclude Include="PugiXml\src\pugiconfig.hpp">
       <Filter>Tools</Filter>
     </ClInclude>
-    <ClInclude Include="BuffManager.h">
-      <Filter>Tools</Filter>
-    </ClInclude>
     <ClInclude Include="j1Entity.h">
       <Filter>Modules</Filter>
     </ClInclude>
@@ -145,6 +142,9 @@
       <Filter>Modules\UI</Filter>
     </ClInclude>
     <ClInclude Include="j1Fonts.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Module_BuffManager.h">
       <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>

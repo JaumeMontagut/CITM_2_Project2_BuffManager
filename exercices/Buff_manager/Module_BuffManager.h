@@ -1,5 +1,5 @@
-#ifndef __BUFF_MANAGER_H__
-#define __BUFF_MANAGER_H__
+#ifndef __MODULE_BUFF_MANAGER_H__
+#define __MODULE_BUFF_MANAGER_H__
 
 #include <vector>
 #include <algorithm>
@@ -10,6 +10,7 @@
 #include "SDL/include/SDL_rect.h"
 #include "j1Entity.h"
 #include <string.h>
+#include "j1Module.h"
 
 struct SDL_Texture;
 
@@ -86,4 +87,20 @@ public:
 //- Range
 //- Cost (to deploy a unit)
 //- Duration
+
+
+class Module_BuffManager : public j1Module {
+public:
+	Module_BuffManager();
+	bool Awake(pugi::xml_node & buff_manager_node) override;
+
+	//Button functions
+	//Next turn
+
+	uint GetNewSourceID();
+
+private:
+	uint last_source_id = 0u;
+};
+
 #endif

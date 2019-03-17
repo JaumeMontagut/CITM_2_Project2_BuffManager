@@ -51,7 +51,9 @@ bool Module_UI::Start()
 		{ attack_button->position.x, attack_button->position.y + attack_button->section.h * attack_button->scale_factor },
 		"sword",
 		pixel_font_small);
-	//Center label
+	//Center label (button center - label half width)
+	attack_button->label->position.x = (attack_button->position.x + attack_button->section.w * attack_button->scale_factor * 0.5f) - (attack_button->label->section.w * 0.5f);
+
 
 	return true;
 }

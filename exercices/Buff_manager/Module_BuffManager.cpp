@@ -2,7 +2,7 @@
 #include <algorithm>
 #include "p2Defs.h"
 #include "p2Log.h"
-#include "BuffManager.h"
+#include "Module_BuffManager.h"
 #include <iostream> //To be able to use "unique_ptr"
 #include "j1Render.h"
 #include "j1App.h"
@@ -12,6 +12,7 @@
 #include "SDL/include/SDL_rect.h"
 #include "j1Window.h"
 #include "j1Entity.h"
+#include "j1Module.h"
 
 #pragma Buff region
 
@@ -165,3 +166,18 @@ void Character::RemoveItem(int source_id) {
 	//Go through each state and call Remove_buff
 }
 #pragma endregion Character
+
+Module_BuffManager::Module_BuffManager() : j1Module()
+{
+	name.assign("buff_manager");
+}
+
+bool Module_BuffManager::Awake(pugi::xml_node & buff_manager_node)
+{
+	return true;
+}
+
+uint Module_BuffManager::GetNewSourceID()
+{
+	return last_source_id++;
+}
