@@ -12,7 +12,7 @@ class Button;
 class Module_Buff : public j1Module, public Gui_Listener {
 public:
 	Module_Buff();
-	bool Awake(pugi::xml_node & buff_manager_node) override;
+	bool Awake(pugi::xml_node & buf_node) override;
 	bool Start() override;
 
 	//Button functions
@@ -30,6 +30,8 @@ public:
 
 private:
 	uint last_source_id = 0u;
+
+	pugi::xml_node buff_node;
 
 	//Spell buttons
 	Button *			attack_button = nullptr;

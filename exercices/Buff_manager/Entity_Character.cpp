@@ -104,10 +104,12 @@ int Stat::GetValue()
 }
 
 Character::Character(pugi::xml_node character_node) :
-	Entity(character_node.attribute("x").as_int(), character_node.attribute("y").as_int()),
-	attack(character_node.child("stats").child("attack").attribute("value").as_int()),
-	defense(character_node.child("stats").child("defense").attribute("value").as_int())
+	Entity(character_node.attribute("x").as_int(), character_node.attribute("y").as_int())
 {
+	std::vector<Stat*>::iterator stat = stats.begin();
+	for (int stat_num = 0; stat + stat_num != stats.end(); ++stat_num) {
+		(*(stat + stat_num)) = new Stat(GetStatBaseValue((STAT_TYPE)stat_num, character_node.child("stats")));
+	}
 	max_health = curr_health = character_node.child("stats").child("health").attribute("value").as_int();
 	tex_path = character_node.child("spritesheet").attribute("path").as_string();
 	frame = { character_node.child("animation").child("frame").attribute("x").as_int(),
@@ -135,7 +137,7 @@ bool Character::Update(float dt)
 
 void Character::DealDamage(Character * reciever)
 {
-	int damage = attack.GetValue() - reciever->defense.GetValue();
+	int damage = stats[(int)STAT_TYPE::ATTACK]->GetValue() - reciever->stats[(int)STAT_TYPE::DEFENSE]->GetValue();
 	if (damage > 0)
 	{
 		reciever->curr_health -= damage;
@@ -151,4 +153,17 @@ void Character::AddBuff() {
 
 void Character::RemoveItem(int source_id) {
 	//Go through each state and call Remove_buff
+}
+
+int Character::GetStatBaseValue(STAT_TYPE stat, pugi::xml_node stats_node)
+{
+	switch (stat) {
+	case STAT_TYPE::ATTACK:
+		return stats_node.child("attack").attribute("value").as_int();
+	case STAT_TYPE::DEFENSE:
+		return stats_node.child("defense").attribute("value").as_int();
+	default:
+		LOG("Stat type not found.");
+		return 0;
+	}
 }

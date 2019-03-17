@@ -23,12 +23,18 @@ Module_Buff::Module_Buff() : j1Module()
 	name.assign("buff");
 }
 
-bool Module_Buff::Awake(pugi::xml_node & buff_manager_node)
+bool Module_Buff::Awake(pugi::xml_node & buff_node)
 {
+	this->buff_node = buff_node;
 	return true;
 }
 
 bool Module_Buff::Start() {
+	for (pugi::xml_node iter = buff_node.child("spell"); iter; iter = iter.next_sibling("spell"))
+	{
+
+	}
+
 	//App->ui->CreateLabel({ 50, 50 }, "this is a label", pixel_font, this);
 	//App->ui->CreateImage({ 50, 50 }, {0,0,16,16}, this);
 	attack_button = App->ui->CreateButton({ 60, 605 }, { 0,0,16,16 }, App->buff);

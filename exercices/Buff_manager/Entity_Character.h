@@ -18,11 +18,17 @@ enum class BUFF_TYPE {
 	MULTIPLICATIVE, // AKA: Percent
 };
 
+enum class STAT_TYPE {
+	ATTACK,
+	DEFENSE,
+	MAX
+};
+
 class Buff {
 private:
 	BUFF_TYPE type;
 	float value;
-	uint source_id;//ID from which modifier (object, etc) the buff came from
+	uint source_id;//ID from which modifier (object, spell, etc) the buff came from
 
 public:
 	Buff(BUFF_TYPE type, float value, uint source_id);
@@ -56,8 +62,7 @@ private:
 	int curr_health;
 	int max_health;
 
-	Stat attack;
-	Stat defense;
+	std::vector<Stat*> stats;
 
 	std::string tex_path = "\0";
 	SDL_Texture * tex = nullptr;
@@ -71,6 +76,9 @@ public:
 	void DealDamage(Character * reciever);
 	void AddBuff();
 	void RemoveItem(int source_id);
+
+private:
+	int GetStatBaseValue(STAT_TYPE stat, pugi::xml_node stats_node);
 };
 //Other possible stats:
 //- Stat xp_gain;
@@ -86,6 +94,23 @@ public:
 //- Range
 //- Cost (to deploy a unit)
 //- Duration
+
+class BuffSource {
+	uint source_id;
+	std::list<Buff> buffs;
+};
+
+class Spell : public BuffSource {
+	//Possible stats
+	//- Mana cost
+	//- Duration
+};
+
+//class Equipment : public BuffSource {
+//	Possible stats
+//	- Durability
+//	- Cost
+//};
 
 #endif // !__ENTITY_CHARACTER_H__
 

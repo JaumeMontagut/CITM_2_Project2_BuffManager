@@ -18,6 +18,7 @@
   </window>
 
   <entity>
+    
     <entity type ="character" x="40" y="119">
       <name value="caster"/>
       <pos x ="0" y="0"/>
@@ -31,7 +32,7 @@
         <defense value ="3"/>
       </stats>
     </entity>
-
+    
     <entity type ="character" x="100" y="119">
       <name value="target"/>
       <pos x ="0" y="0"/>
@@ -45,13 +46,23 @@
         <defense value ="3"/>
       </stats>
     </entity>
+    
+  </entity>
 
+  <buff>
+    <spell name="rage">
+      <img>
+        <atlas_position row ="1" column="1"/>
+      </img>
+      <buff stat  ="attack" value ="3" type ="additive"/>
+      <buff stat ="defense" value="3" type="addtitive"/>
+    </spell>
     <!--
     <item name = "sword">
       <buff stat ="attack" value="3" type="additive"/>
       <buff stat ="defense" value="3" type="addtitive"/>
     </item>
     -->
-  </entity>
+  </buff>
 
 </config>
