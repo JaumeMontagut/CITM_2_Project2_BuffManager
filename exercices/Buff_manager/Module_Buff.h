@@ -18,6 +18,8 @@ public:
 
 	//Next turn
 
+	void AddOutPutText(std::string);
+
 	uint GetNewSourceID();
 	BUFF_TYPE GetBuffType(std::string);
 
@@ -36,8 +38,9 @@ private:
 
 	std::list<Spell*> spells;
 
-	//Spell buttons
+	//UI
 	Button *			attack_button = nullptr;
+	std::list<Label*> output_Texts;
 };
 
 #endif

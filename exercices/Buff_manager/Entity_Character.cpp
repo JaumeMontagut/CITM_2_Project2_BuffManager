@@ -136,7 +136,7 @@ bool Character::Update(float dt)
 	//Health bar background
 	App->render->DrawQuad({ x - 5, y - 22, 10, 2 }, 0, 0, 0);
 	//Health bar fill
-	App->render->DrawQuad({ x - 5, y - 22, (int)(10 * (curr_health / (float)max_health)), 2 }, 158, 41, 59);
+	App->render->DrawQuad({ x - 5, y - 22, (int)(10.f * ((float)curr_health / (float)max_health)), 2 }, 158, 41, 59);
 	return true;
 }
 
@@ -147,11 +147,13 @@ void Character::DealDamage(Character * reciever)
 	if (damage > 0)
 	{
 		reciever->curr_health -= damage;
-		if (reciever->curr_health <= 0.f)
+		if (reciever->curr_health <= 0)
 		{
+			reciever->curr_health = 0;
 			//Die
 		}
 	}
+	App->buff->AddOutPutText("attack button clicked");
 }
 
 void Character::AddBuff() {

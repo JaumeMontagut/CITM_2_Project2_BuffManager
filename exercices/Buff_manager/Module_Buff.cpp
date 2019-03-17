@@ -72,8 +72,24 @@ bool Module_Buff::OnClick(UI_Object * object)
 {
 	if (object == attack_button) {
 		App->scene->caster->DealDamage(App->scene->target);
-		LOG("attack button clicked");
 	}
 
 	return true;
+}
+
+void Module_Buff::AddOutPutText(std::string text)
+{
+	for (std::list<Label*>::reverse_iterator iter = output_Texts.rbegin(); iter != output_Texts.rend(); ++iter)
+	{
+		iPoint newPos = { (*iter)->position.x,(*iter)->position.y + 30 };
+		(*iter)->SetPosition(newPos);
+	}
+
+	output_Texts.push_back(App->ui->CreateLabel({ 700,0 }, text, App->ui->pixel_font_small, nullptr, { 0,0,0,255 }));
+
+	if (output_Texts.size() > 30)
+	{
+		App->ui->DeleteObject((UI_Object*)*output_Texts.begin());
+		output_Texts.pop_front();
+	}
 }
