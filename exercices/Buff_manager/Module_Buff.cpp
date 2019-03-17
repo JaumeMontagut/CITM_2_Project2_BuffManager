@@ -142,16 +142,10 @@ void Cut(Spell * spell)
 
 void AddSpellBuff(Spell * spell) {
 	if (!spell->is_active) {
-		//Add buff
-		for (std::list<Buff*>::iterator buff = spell->buffs.begin(); buff != spell->buffs.end(); ++buff) {
-			App->scene->dwarf->stats[(*buff)->GetStat()]->AddBuff(*(*buff));
-		}
+		App->scene->dwarf->AddBuff(spell);
 	}
 	else {
-		//Remove buff
-		for (std::list<Buff*>::iterator buff = spell->buffs.begin(); buff != spell->buffs.end(); ++buff) {
-			App->scene->dwarf->stats[(*buff)->GetStat()]->RemoveBuff((*buff)->GetSource());
-		}
+		App->scene->dwarf->RemoveBuff(spell);
 	}
 	spell->is_active = !spell->is_active;
 }

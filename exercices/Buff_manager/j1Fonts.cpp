@@ -7,6 +7,8 @@
 #include "SDL\include\SDL.h"
 #include "SDL_TTF\include\SDL_ttf.h"
 #pragma comment( lib, "SDL_ttf/libx86/SDL2_ttf.lib" )
+#include "j1App.h"
+#include "Module_UI.h"
 
 
 
@@ -38,6 +40,13 @@ bool j1Fonts::Awake(pugi::xml_node& conf)
 	}
 
 	return ret;
+}
+
+bool j1Fonts::Start()
+{
+	App->ui->pixel_font = App->font->Load("fonts/pixelart.ttf", 36);
+	App->ui->pixel_font_small = App->font->Load("fonts/pixelart.ttf", 24);
+	return true;
 }
 
 // Called before quitting

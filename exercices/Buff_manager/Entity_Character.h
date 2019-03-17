@@ -43,62 +43,6 @@ public:
 	bool IsCausedBySource(uint source_id);
 };
 
-//A class used in any stat which can be boosted by modifiers (equipment, skills, talent trees, enviroment, synergies, etc.)
-class Stat {
-private:
-	float final_value;
-	std::vector<Buff*> additive_buffs;
-	std::vector<Buff*> multiplicative_buffs;
-
-public:
-	float base;// The value of the stat without adding any buff
-	//TO IMPROVE: Make this field private
-	Stat(int base);
-
-	void AddBuff(Buff buff);
-	void RemoveBuff(uint source_id);
-	void CalculateStat();
-	int GetValue();
-};
-
-class Character : public Entity
-{
-public:
-	int curr_health;
-	bool alive = true;
-	std::map<std::string, Stat*> stats;
-	int max_health;
-	std::string tex_path = "\0";
-	SDL_Texture * tex = nullptr;
-	SDL_Rect frame = { 0, 0, 0, 0 };
-	std::string character_name = "\0";
-
-private:
-	std::map<std::string, Label*> labels;
-
-public:
-	Character(pugi::xml_node character_node);
-	bool Start() override;
-	bool Update(float dt) override;
-
-private:
-	int GetStatBaseValue(STAT_TYPE stat, pugi::xml_node stats_node);
-};
-//Other possible stats:
-//- Stat xp_gain;
-//- Stat gold_gain;
-//- float curr_mana;
-//- Stat max_mana;
-//- Stat max_health;
-//- Evasion
-//- Critical chance
-//- Movement points
-//- Attack speed
-//- Cooldown
-//- Range
-//- Cost (to deploy a unit)
-//- Duration
-
 class BuffSource {
 public:
 	BuffSource(pugi::xml_node buff_source_node);
@@ -128,6 +72,66 @@ public:
 //	- Durability
 //	- Cost
 //};
+
+//A class used in any stat which can be boosted by modifiers (equipment, skills, talent trees, enviroment, synergies, etc.)
+class Stat {
+private:
+	float final_value;
+	std::vector<Buff*> additive_buffs;
+	std::vector<Buff*> multiplicative_buffs;
+
+public:
+	float base;// The value of the stat without adding any buff
+	//TO IMPROVE: Make this field private
+	Stat(int base);
+
+	void AddBuff(Buff buff);
+	void RemoveBuff(uint source_id);
+	void CalculateStat();
+	int GetValue();
+};
+
+class Character : public Entity
+{
+public:
+	int curr_health;
+	bool alive = true;
+	int max_health;
+	std::string tex_path = "\0";
+	SDL_Texture * tex = nullptr;
+	SDL_Rect frame = { 0, 0, 0, 0 };
+	std::string character_name = "\0";
+	std::map<std::string, Stat*> stats;
+
+private:
+	std::map<std::string, Label*> stat_labels;
+
+public:
+	Character(pugi::xml_node character_node);
+	bool Start() override;
+	bool Update(float dt) override;
+
+	void AddBuff(BuffSource * buff_source);
+	void RemoveBuff(BuffSource * buff_source);
+	void UpdateStatLabels();
+
+private:
+	int GetStatBaseValue(STAT_TYPE stat, pugi::xml_node stats_node);
+};
+//Other possible stats:
+//- Stat xp_gain;
+//- Stat gold_gain;
+//- float curr_mana;
+//- Stat max_mana;
+//- Stat max_health;
+//- Evasion
+//- Critical chance
+//- Movement points
+//- Attack speed
+//- Cooldown
+//- Range
+//- Cost (to deploy a unit)
+//- Duration
 
 #endif // !__ENTITY_CHARACTER_H__
 

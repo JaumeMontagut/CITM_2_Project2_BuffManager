@@ -40,8 +40,6 @@ bool Module_UI::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Module_UI::Start()
 {
-	pixel_font = App->font->Load("fonts/pixelart.ttf", 36);
-	pixel_font_small = App->font->Load("fonts/pixelart.ttf", 24);
 	return true;
 }
 

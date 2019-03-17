@@ -77,6 +77,8 @@ void Stat::AddBuff(Buff buff)
 //Searches through all the buffs and removes the ones caused by the source
 void Stat::RemoveBuff(uint source_id)
 {
+	App->buff->AddOutPutText("Removed buff.");
+
 	additive_buffs.erase(std::remove_if(
 		additive_buffs.begin(),
 		additive_buffs.end(),
@@ -114,7 +116,7 @@ int Stat::GetValue()
 Character::Character(pugi::xml_node character_node) :
 	Entity(character_node.attribute("x").as_int(), character_node.attribute("y").as_int())
 {
-	
+	int i = 0, space = 25, scale_factor = 4, initial_height =-50;
 	for (pugi::xml_node iter = character_node.child("stats").child("stat"); iter; iter = iter.next_sibling("stat"))
 	{
 		std::string stat_name = iter.attribute("stat").as_string();
@@ -125,12 +127,15 @@ Character::Character(pugi::xml_node character_node) :
 			new Stat(iter.attribute("value").as_int())));
 
 		//Create a label for the stat
-		labels.insert(std::pair<std::string, Label*>(
+		stat_labels.insert(std::pair<std::string, Label*>(
 			stat_name,
 			App->ui->CreateLabel(
-				{ x, y - 50 },
+				{ x * scale_factor, y - initial_height + space * i },
 				stat_name + ": " + std::to_string(stats[stat_name]->GetValue()),
-				App->ui->pixel_font_small)));
+				App->ui->pixel_font,
+				nullptr,
+				{0,0,0})));
+		++i;
 	}
 	character_name = character_node.child("name").attribute("value").as_string();
 	max_health = curr_health = character_node.child("health").attribute("value").as_int();
@@ -155,6 +160,36 @@ bool Character::Update(float dt)
 	//Health bar fill
 	App->render->DrawQuad({ x - 5, y - 22, (int)(10.f * ((float)curr_health / (float)max_health)), 2 }, 158, 41, 59);
 	return true;
+}
+
+void Character::AddBuff(BuffSource * buff_source)
+{
+	for (std::list<Buff*>::iterator buff = buff_source->buffs.begin(); buff != buff_source->buffs.end(); ++buff)
+	{
+		std::string stat_name = (*buff)->GetStat();
+		stats[stat_name]->AddBuff(*(*buff));
+		stats[stat_name]->CalculateStat();
+		stat_labels[stat_name]->SetText(stat_name + ": " + std::to_string(stats[stat_name]->GetValue()));
+	}
+}
+
+void Character::RemoveBuff(BuffSource * buff_source)
+{
+	//Remove buff
+	for (std::list<Buff*>::iterator buff = buff_source->buffs.begin(); buff != buff_source->buffs.end(); ++buff) {
+		stats[(*buff)->GetStat()]->RemoveBuff((*buff)->GetSource());
+	}
+	//Recalculate stats
+
+	//Update stat labels
+}
+
+void Character::UpdateStatLabels()
+{
+	for (std::map<std::string, Label*>::iterator iter = stat_labels.begin(); iter != stat_labels.end(); ++iter)
+	{
+		(*iter).second->SetText((*iter).first + ": " + std::to_string(stats[(*iter).first]->GetValue()));
+	}
 }
 
 int Character::GetStatBaseValue(STAT_TYPE stat, pugi::xml_node stats_node)
