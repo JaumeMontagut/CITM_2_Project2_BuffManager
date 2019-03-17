@@ -168,6 +168,7 @@ void Character::AddBuff(BuffSource * buff_source)
 	for (std::list<Buff*>::iterator buff = buff_source->buffs.begin(); buff != buff_source->buffs.end(); ++buff)
 	{
 		std::string stat_name = (*buff)->GetStat();
+
 		stats[stat_name]->AddBuff(*(*buff));
 		stats[stat_name]->CalculateStat();
 		stat_labels[stat_name]->SetText(stat_name + ": " + std::to_string(stats[stat_name]->GetValue()));
@@ -176,13 +177,14 @@ void Character::AddBuff(BuffSource * buff_source)
 
 void Character::RemoveBuff(BuffSource * buff_source)
 {
-	//Remove buff
-	for (std::list<Buff*>::iterator buff = buff_source->buffs.begin(); buff != buff_source->buffs.end(); ++buff) {
-		stats[(*buff)->GetStat()]->RemoveBuff((*buff)->GetSource());
-	}
-	//Recalculate stats
+	for (std::list<Buff*>::iterator buff = buff_source->buffs.begin(); buff != buff_source->buffs.end(); ++buff)
+	{
+		std::string stat_name = (*buff)->GetStat();
 
-	//Update stat labels
+		stats[stat_name]->RemoveBuff((*buff)->GetSource());
+		stats[stat_name]->CalculateStat();
+		stat_labels[stat_name]->SetText(stat_name + ": " + std::to_string(stats[stat_name]->GetValue()));
+	}
 }
 
 void Character::UpdateStatLabels()
