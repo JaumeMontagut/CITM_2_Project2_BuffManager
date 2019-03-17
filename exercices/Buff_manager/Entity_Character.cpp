@@ -36,7 +36,7 @@ std::string Buff::GetStat() {
 	return stat;
 }
 
-int Buff::GetValue()
+float Buff::GetValue()
 {
 	return value;
 }
@@ -50,7 +50,7 @@ bool Buff::IsCausedBySource(uint source_id) {
 	return this->source_id == source_id;
 }
 
-Stat::Stat(int base) :
+Stat::Stat(float base) :
 	base_value(base),
 	final_value(base)
 {
@@ -61,11 +61,11 @@ void Stat::AddBuff(Buff & buff)
 	switch (buff.GetType())
 	{
 	case BUFF_TYPE::ADDITIVE:
-		App->buff->AddOutPutText("Added +" + std::to_string(buff.GetValue()) + " " + buff.GetStat());
+		App->buff->AddOutPutText("Added +" + std::to_string((int)buff.GetValue()) + " " + buff.GetStat());
 		additive_buffs.push_back(&buff);
 		break;
 	case BUFF_TYPE::MULTIPLICATIVE:
-		App->buff->AddOutPutText("Added +" + std::to_string(buff.GetValue()) + "% " + buff.GetStat());
+		App->buff->AddOutPutText("Added +" + std::to_string((int)buff.GetValue()) + "% " + buff.GetStat());
 		multiplicative_buffs.push_back(&buff);
 		break;
 	default:
@@ -109,7 +109,7 @@ void Stat::CalculateStat()
 	final_value += totalMult * final_value;
 }
 
-int Stat::GetValue()
+float Stat::GetValue()
 {
 	return final_value;
 }
@@ -132,7 +132,7 @@ Character::Character(pugi::xml_node character_node) :
 			stat_name,
 			App->ui->CreateLabel(
 				{ x * scale_factor, y - initial_height + space * i },
-				stat_name + ": " + std::to_string(stats[stat_name]->GetValue()),
+				stat_name + ": " + std::to_string((int)stats[stat_name]->GetValue()),
 				App->ui->pixel_font,
 				nullptr,
 				{0,0,0})));
@@ -171,7 +171,7 @@ void Character::AddBuff(BuffSource * buff_source)
 
 		stats[stat_name]->AddBuff(*(*buff));
 		stats[stat_name]->CalculateStat();
-		stat_labels[stat_name]->SetText(stat_name + ": " + std::to_string(stats[stat_name]->GetValue()));
+		stat_labels[stat_name]->SetText(stat_name + ": " + std::to_string((int)stats[stat_name]->GetValue()));
 	}
 }
 
@@ -183,7 +183,7 @@ void Character::RemoveBuff(BuffSource * buff_source)
 
 		stats[stat_name]->RemoveBuff((*buff)->GetSource());
 		stats[stat_name]->CalculateStat();
-		stat_labels[stat_name]->SetText(stat_name + ": " + std::to_string(stats[stat_name]->GetValue()));
+		stat_labels[stat_name]->SetText(stat_name + ": " + std::to_string((int)stats[stat_name]->GetValue()));
 	}
 }
 

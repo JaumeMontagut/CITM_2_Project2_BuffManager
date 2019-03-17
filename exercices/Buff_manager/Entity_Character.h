@@ -38,7 +38,7 @@ public:
 	Buff(BUFF_TYPE type, std::string stat, float value, uint source_id);
 	BUFF_TYPE GetType();
 	std::string GetStat();
-	int GetValue();
+	float GetValue();
 	uint GetSource();
 	bool IsCausedBySource(uint source_id);
 };
@@ -83,12 +83,12 @@ private:
 public:
 	float base_value;// The value of the stat without adding any buff
 	//TO IMPROVE: Make this field private
-	Stat(int base);
+	Stat(float base);
 
 	void AddBuff(Buff & buff);
 	void RemoveBuff(uint source_id);
 	void CalculateStat();
-	int GetValue();
+	float GetValue();
 };
 
 class Character : public Entity
