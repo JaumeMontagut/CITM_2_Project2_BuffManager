@@ -15,6 +15,7 @@
 #include "j1Entity.h"
 #include "Module_UI.h"
 #include "j1Fonts.h"
+#include "Module_BuffManager.h"
 
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
@@ -30,6 +31,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	entity = new j1Entity();
 	ui = new Module_UI();
 	font = new j1Fonts();
+	buff = new Module_BuffManager();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -42,6 +44,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	// scene last
 	AddModule(scene);
 	AddModule(entity);
+	AddModule(buff);
 	AddModule(ui);
 
 	// render last to swap buffer
