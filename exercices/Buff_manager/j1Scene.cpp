@@ -32,6 +32,11 @@ bool j1Scene::Awake(pugi::xml_node& config)
 bool j1Scene::Start()
 {	
 	pixel_font = App->font->Load("fonts/pixelart.ttf", 24);
+
+	//App->ui->CreateLabel({ 50, 50 }, "this is a label", pixel_font, this);
+	//App->ui->CreateImage({ 50, 50 }, {0,0,16,16}, this);
+	attack_button = App->ui->CreateButton({ 50, 50 }, { 0,0,16,16 }, this);
+
 	return true;
 }
 
@@ -44,11 +49,6 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-
-	//App->ui->CreateLabel({ 50, 50 }, "this is a label", pixel_font, this);
-	//App->ui->CreateImage({ 50, 50 }, {0,0,16,16}, this);
-	attack_button = App->ui->CreateButton({ 50, 50 }, { 0,0,16,16 }, this);
-
 	//Attack when player presses 1
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
 		caster->DealDamage(target);
