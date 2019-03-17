@@ -81,11 +81,11 @@ private:
 	std::vector<Buff*> multiplicative_buffs;
 
 public:
-	float base;// The value of the stat without adding any buff
+	float base_value;// The value of the stat without adding any buff
 	//TO IMPROVE: Make this field private
 	Stat(int base);
 
-	void AddBuff(Buff buff);
+	void AddBuff(Buff & buff);
 	void RemoveBuff(uint source_id);
 	void CalculateStat();
 	int GetValue();

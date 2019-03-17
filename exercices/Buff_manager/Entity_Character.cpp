@@ -51,12 +51,12 @@ bool Buff::IsCausedBySource(uint source_id) {
 }
 
 Stat::Stat(int base) :
-	base(base),
+	base_value(base),
 	final_value(base)
 {
 }
 
-void Stat::AddBuff(Buff buff)
+void Stat::AddBuff(Buff & buff)
 {
 	switch (buff.GetType())
 	{
@@ -94,16 +94,17 @@ void Stat::RemoveBuff(uint source_id)
 
 void Stat::CalculateStat()
 {
+	final_value = base_value;
 	//1. Apply addtive buffs
 	for (std::vector<Buff*>::iterator iter = additive_buffs.begin(); iter != additive_buffs.end(); ++iter)
 	{
 		final_value += (*iter)->GetValue();
 	}
 	//2. Add multiplicative buffs and calculate the percentage
-	float totalMult;
-	for (std::vector<Buff*>::iterator iter = additive_buffs.begin(); iter != additive_buffs.end(); ++iter)
+	float totalMult = 0.f;
+	for (std::vector<Buff*>::iterator iter = multiplicative_buffs.begin(); iter != multiplicative_buffs.end(); ++iter)
 	{
-		totalMult = (*iter)->GetValue();
+		totalMult += (*iter)->GetValue();
 	}
 	final_value += totalMult * final_value;
 }
