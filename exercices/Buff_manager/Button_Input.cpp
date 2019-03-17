@@ -16,6 +16,7 @@ Button::Button(const iPoint position, const SDL_Rect rect, SDL_Texture * texture
 	int scale = (int)App->win->GetScale();
 	section.w = rect.w /** scale*/;
 	section.h = rect.h /** scale*/;
+	scale_factor = 4;
 }
 
 Button::~Button()
@@ -29,7 +30,7 @@ Button::~Button()
 
 bool Button::Draw()
 {
-	App->render->BlitUI(texture, position.x, position.y, 2, &rect, false, 0.0f);
+	App->render->BlitUI(texture, position.x, position.y, scale_factor, &rect, false, 0.0f);
 	return true;
 }
 

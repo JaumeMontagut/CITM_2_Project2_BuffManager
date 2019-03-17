@@ -66,6 +66,7 @@ protected:
 	SDL_Rect			  section = {0, 0, 0, 0};
 	SDL_Texture         * texture = nullptr;
 	Gui_Listener        * listener = nullptr;
+	int					  scale_factor = 1;
 
 	// Anchors =========================================
 	UI_Object           * anchor_parent = nullptr;

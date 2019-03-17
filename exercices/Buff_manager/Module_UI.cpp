@@ -45,7 +45,11 @@ bool Module_UI::Start()
 
 	//App->ui->CreateLabel({ 50, 50 }, "this is a label", pixel_font, this);
 	//App->ui->CreateImage({ 50, 50 }, {0,0,16,16}, this);
-	App->scene->attack_button = App->ui->CreateButton({ 50, 50 }, { 0,0,16,16 }, App->scene);
+	App->scene->attack_button = App->ui->CreateButton({ 60, 605 }, { 0,0,16,16 }, App->scene);
+	App->scene->attack_button->SetLabel(
+		{ App->scene->attack_button->position.x, App->scene->attack_button->position.y + App->scene->attack_button->section.h * App->scene->attack_button->scale_factor },
+		"sword",
+		App->scene->pixel_font);
 
 	return true;
 }
@@ -93,8 +97,8 @@ bool Module_UI::PreUpdate()
 
 		rect.x = (*item)->position.x / App->win->GetScale();
 		rect.y = (*item)->position.y / App->win->GetScale();
-		rect.w = ((*item)->section.w / App->win->GetScale()) * 2;
-		rect.h = ((*item)->section.h / App->win->GetScale()) * 2;
+		rect.w = ((*item)->section.w / App->win->GetScale()) * (*item)->scale_factor;
+		rect.h = ((*item)->section.h / App->win->GetScale()) * (*item)->scale_factor;
 
 		if (cursor_position.x >= rect.x && cursor_position.x <= rect.x + rect.w && cursor_position.y >= rect.y && cursor_position.y <= rect.y + rect.h)
 		{
@@ -225,11 +229,6 @@ bool Module_UI::PostUpdate()
 	// Draw all UI objects ====================================
 	DrawUI(screen);
 
-	// Cursor =================================================
-	App->input->GetMousePosition(cursor_position.x, cursor_position.y);
-
-	if(show_cursor)
-		//App->render->Blit(atlas, cursor_position.x, cursor_position.y, &cursor_rect, false, 0.0F);
 	return true;
 }
 
@@ -445,8 +444,8 @@ void Module_UI::DrawUI(UI_Object * object)
 		SDL_Rect rect;
 		rect.x = object->position.x;
 		rect.y = object->position.y;
-		rect.w = object->section.w * 2;
-		rect.h = object->section.h * 2;
+		rect.w = object->section.w * object->scale_factor;
+		rect.h = object->section.h * object->scale_factor;
 
 		if (object->hover_state != HoverState::None )
 		{

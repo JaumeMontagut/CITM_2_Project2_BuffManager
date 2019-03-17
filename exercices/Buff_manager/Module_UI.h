@@ -116,7 +116,6 @@ public:
 	SDL_Rect			cursor_rect;
 	iPoint				cursor_position;
 	iPoint				cursor_offset;
-	bool				show_cursor = true; 
 	Image *				cursor = nullptr;
 
 };
