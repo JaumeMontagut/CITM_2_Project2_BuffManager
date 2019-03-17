@@ -445,8 +445,8 @@ void Module_UI::DrawUI(UI_Object * object)
 		SDL_Rect rect;
 		rect.x = object->position.x;
 		rect.y = object->position.y;
-		rect.w = object->section.w;
-		rect.h = object->section.h;
+		rect.w = object->section.w * 2;
+		rect.h = object->section.h * 2;
 
 		if (object->hover_state != HoverState::None )
 		{
