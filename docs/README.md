@@ -13,8 +13,9 @@ We've prepared c++ code with a few exercices (TO DOs) and an explanation so that
 
 # The download links
 
-To start, download the following files:
-- Exercices
+To start, download the project found here:
+
+[https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager]
 
 ![](https://lh3.googleusercontent.com/--Fqu5ifWEUs/WDChZLkU1iI/AAAAAAAABV4/2StCv-SrSXk-dzgv8k5xyu2m80fUcvt9wCJkCGAYYCw/w1082-h609-n-rw-no/large.gif)
 
