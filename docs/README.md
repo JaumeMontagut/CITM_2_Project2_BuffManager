@@ -152,6 +152,8 @@ For this example we'll only be using a spell class. Since it's the most complex 
 
 ## Adding buffs
 
+![](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/1.PNG)
+
 To add buffs we follow this steps:
 
 1. Buffs are defined with its source in the XML.
@@ -165,7 +167,7 @@ To add buffs we follow this steps:
 </spell>
 ```
 
-1. They are added on the source's buffs vector when it's created
+2. They are added on the source's buffs vector when it's created
 
 ```
 BuffSource::BuffSource(pugi::xml_node source_node)
@@ -182,7 +184,7 @@ BuffSource::BuffSource(pugi::xml_node source_node)
 }
 ```
 
-1. Then they must be applied to the character, in our case, when we activate a spell.
+3. Then they must be applied to the character, in our case, when we activate a spell.
 
 ```
 void AddSpellBuff(Spell * spell) {
@@ -196,7 +198,7 @@ void AddSpellBuff(Spell * spell) {
 }
 ```
 
-1. We look to which stat is applied and call its AddBuff() function
+4. We look to which stat is applied and call its AddBuff() function
 
 ```
 void Stat::AddBuff(Buff & buff)
@@ -220,6 +222,8 @@ Now the buff is stored in one of the stats so it can be used to calculate its va
 
 ## Removing buffs
 
+![](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/2.PNG)
+
 To remove buffs we follow this steps:
 
 1. We identiy which `BuffSource` caused the buff.
@@ -238,7 +242,7 @@ void AddSpellBuff(Spell * spell) {
 }
 ```
 
-1. We detect which stats the buffs alters
+2. We detect which stats the buffs alters
 
 ```
 void Character::RemoveBuff(BuffSource * buff_source)
@@ -253,7 +257,7 @@ void Character::RemoveBuff(BuffSource * buff_source)
 }
 ```
 
-1. And call `RemoveBuff(uint source_id)` on them
+3. And call `RemoveBuff(uint source_id)` on them
 
 ```
 void Stat::RemoveBuff(uint source_id)
@@ -275,6 +279,8 @@ void Stat::RemoveBuff(uint source_id)
 Now all the buffs have been removed from the respective stats lists!
 
 ## Calculating buffs
+
+![](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/3.PNG)
 
 Finally, and the most important part is how the buffs are calculated.
 
