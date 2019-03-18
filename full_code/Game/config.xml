@@ -31,6 +31,7 @@
         <stat stat="attack" value ="10"/>
         <stat stat="defense" value ="3"/>
         <!--TODO 2: Add a stat through the XML-->
+        <stat stat="intelligence" value ="5"/>
       </stats>
     </entity>
     
@@ -73,9 +74,18 @@
     <!-- Spell should modify the stat you just created in TODO 2-->
     <!-- Leave function name as "add buff"-->
     <!-- Choose the sprite you prefer in the atlas-->
+    <spell name="blessing">
+      <function name="add_buff"/>
+      <atlas_icon row ="6" column="6"/>
+      <buff stat  ="xp_gain" value ="2" type ="additive"/>
+    </spell>
 
     <!--TODO 5: Create a new spell in the XML-->
-    
+    <spell name="mental">
+      <function name="mental"/>
+      <atlas_icon row ="5" column="5"/>
+    </spell>
+
   </buff>
 
 </config>

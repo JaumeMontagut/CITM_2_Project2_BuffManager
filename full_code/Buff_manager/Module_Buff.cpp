@@ -85,6 +85,7 @@ void Module_Buff::FillFunctionsMap()
 	spell_functions["cut"] = &Cut;
 	spell_functions["add_buff"] = &AddSpellBuff;
 	//TODO 6: Link the spell name with the function
+	spell_functions["mental"] = &Mental;
 }
 
 void(*Module_Buff::GetFunctionPointer(std::string functionName))(Spell *) {
@@ -141,8 +142,6 @@ void Cut(Spell * spell)
 	}
 }
 
-//TODO 4: Create a function similar to Cut()
-
 void AddSpellBuff(Spell * spell) {
 	if (!spell->is_active) {
 		App->scene->dwarf->AddBuff(spell);
@@ -151,4 +150,26 @@ void AddSpellBuff(Spell * spell) {
 		App->scene->dwarf->RemoveBuff(spell);
 	}
 	spell->is_active = !spell->is_active;
+}
+
+//TODO 4: Create a function similar to Cut()
+void Mental(Spell * spell)
+{
+	if (App->scene->goblin->alive) {
+		int damage = App->scene->dwarf->stats["intelligence"]->GetValue();
+		if (damage > 0)
+		{
+			App->scene->goblin->curr_health -= damage;
+			App->buff->AddOutPutText(App->scene->dwarf->character_name + " dealt " + std::to_string(damage) + " damage to " + App->scene->goblin->character_name + ".");
+			if (App->scene->goblin->curr_health <= 0 && App->scene->goblin->alive)
+			{
+				App->scene->goblin->alive = false;
+				App->scene->goblin->curr_health = 0;
+				App->buff->AddOutPutText(App->scene->goblin->character_name + " died.");
+			}
+		}
+	}
+	else {
+		App->buff->AddOutPutText("it's already dead...");
+	}
 }

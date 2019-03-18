@@ -43,5 +43,6 @@ private:
 //Spell functions
 void Cut(Spell * spell);
 void AddSpellBuff(Spell * spell);
+void Mental(Spell * spell);
 
 #endif
