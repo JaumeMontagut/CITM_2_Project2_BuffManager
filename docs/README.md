@@ -22,13 +22,15 @@ To start, download the following files:
 
 The first thing you may ask is: "Why do we need a system like this?".
 The answer is simple, when we have multiple systems that modify stats (equipment, talents, passives, etc.) and hundereds of items in those systems, making them interact becomes complete chaos if we don't have an appropriate system for it.
-* IMG
+
+![](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/attributes.jpg)
 
 # The problem
 
 So now that we know why it is important to have a system like this we need to understand exactly what it does.
 We need to create a system that given buffs from different sources, calculates a stat that we can later use to deal damage, calculate the speed at which we need to move, how many seconds can we be stunned, etc.
-* IMG
+
+![](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/buff_manager_problem.png)
 
 # The concept
 
@@ -38,7 +40,9 @@ Our approach for this problem has been the following:
 * Each stat, such as attack, will have a base value and a list of all the buffs that have been applied to them.
 
 On the other side we'll have a class named Buff Source which will be the parent of all the systems mentioned previously.
-It will hold information about the buffs that can be 
+It will hold information about the buffs that can be applied with that source.
+
+![](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/Buff_manager_approach.png)
 
 ## Base Classes
 
@@ -313,12 +317,7 @@ To achieve this we already have:
 
 # The exercices
 
-You can also find the soultion here:
-- Solution
-
-- Add buffs
-- Remove buffs
-- XML
+Get the slides [here](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/BUFF%20MANAGER.pptx).
 
 # The adaptation
 
@@ -357,27 +356,27 @@ Always make sure your new class inherits from BuffSource. Note that a class can 
 
 # The resources
 
-https://forum.unity.com/threads/tutorial-character-stats-aka-attributes-system.504095/
+[https://forum.unity.com/threads/tutorial-character-stats-aka-attributes-system.504095/]
 
-https://www.youtube.com/watch?v=SH25f3cXBVc
+[https://www.youtube.com/watch?v=SH25f3cXBVc]
 
-https://www.youtube.com/watch?v=e8GmfoaOB4Y
+[https://www.youtube.com/watch?v=e8GmfoaOB4Y]
 
-http://howtomakeanrpg.com/a/how-to-make-an-rpg-stats.html
+[http://howtomakeanrpg.com/a/how-to-make-an-rpg-stats.html]
 
-http://www.gamasutra.com/blogs/LarsDoucet/20111101/90518/A_Status_Effect_Stacking_Algorithm.php
+[http://www.gamasutra.com/blogs/LarsDoucet/20111101/90518/A_Status_Effect_Stacking_Algorithm.php]
 
-https://gamedev.stackexchange.com/questions/29982/whats-a-way-to-implement-a-flexible-buff-debuff-system
+[https://gamedev.stackexchange.com/questions/29982/whats-a-way-to-implement-a-flexible-buff-debuff-system]
 
-https://www.youtube.com/watch?v=8Dg_QjDEs2Q&list=PLDlDppj_BAZDlDDefRh1jrxxqypvtuaCD&index=12
+[https://www.youtube.com/watch?v=8Dg_QjDEs2Q&list=PLDlDppj_BAZDlDDefRh1jrxxqypvtuaCD&index=12]
 
-https://www.youtube.com/watch?v=8gOudI_g8jM&list=PLDlDppj_BAZDlDDefRh1jrxxqypvtuaCD&index=15
+[https://www.youtube.com/watch?v=8gOudI_g8jM&list=PLDlDppj_BAZDlDDefRh1jrxxqypvtuaCD&index=15]
 
-https://www.youtube.com/watch?v=li6ha2d8Arw&list=PLVbdRvy0bA6lt57nPF6r5EXhqquu69wKZ&index=1
+[https://www.youtube.com/watch?v=li6ha2d8Arw&list=PLVbdRvy0bA6lt57nPF6r5EXhqquu69wKZ&index=1]
 
-https://www.gamedev.net/forums/topic/622135-time-related-state-effects-buffsdebuffs-what-are-manageable-code-designs/
+[https://www.gamedev.net/forums/topic/622135-time-related-state-effects-buffsdebuffs-what-are-manageable-code-designs/]
 
-https://gamedevelopment.tutsplus.com/tutorials/using-the-composite-design-pattern-for-an-rpg-attributes-system--gamedev-243
+[https://gamedevelopment.tutsplus.com/tutorials/using-the-composite-design-pattern-for-an-rpg-attributes-system--gamedev-243]
 
 
 # The contact
@@ -385,7 +384,7 @@ https://gamedevelopment.tutsplus.com/tutorials/using-the-composite-design-patter
 [<img width="32" height="32" src="https://cdn.iconscout.com/icon/free/png-256/github-84-436555.png">](https://github.com/JaumeMontagut) [<img width="32" height="32" src="https://cdn.icon-icons.com/icons2/122/PNG/128/twitter_socialnetwork_20007.png">](https://twitter.com/_wadoren)
 [<img width="32" height="32" src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/linkedin-128.png">](https://www.linkedin.com/in/jaume-montagut-guix-7389a4166/)
 
-# The spam ¯\_(ツ)_/¯
+# The spam ¯\\_(ツ)_/¯
 
 We recently participated in the 3HMA contest!
-Help us by voting (here)[http://upcvideogames.com/juegos/], we are SWAP!
+Help us by voting [here](http://upcvideogames.com/juegos/), we are SWAP!
