@@ -51,7 +51,7 @@ Here we will show more in-depth the members and methods of the classes that crea
 
 ### Character Class
 
-```
+``` cpp
 class Character : public Entity {
 public:
 	int curr_health;
@@ -73,7 +73,7 @@ public:
 
 ### Stat class
 
-```
+``` cpp
 class Stat {
 private:
   float base_value;
@@ -94,7 +94,7 @@ public:
 
 ### Buff class
 
-```
+``` cpp
 enum class BUFF_TYPE {
 	ADDITIVE, //AKA: Flat, raw
 	MULTIPLICATIVE, // AKA: Percent
@@ -122,7 +122,7 @@ Each buff can have a type. In our case we've represented the most commmon types,
 
 ### Buff source class
 
-```
+``` cpp
 class BuffSource {
 private:
 	uint source_id;
@@ -135,7 +135,7 @@ public:
 
 ### Spell class
 
-```
+``` cpp
 class Spell : public BuffSource {
 public:
 	bool is_active = false;
@@ -158,7 +158,7 @@ To add buffs we follow this steps:
 
 1. Buffs are defined with its source in the XML.
 
-```
+``` cpp
 <spell name="rage">
   <function name="add_buff"/>
   <atlas_icon row ="0" column="4"/>
@@ -169,7 +169,7 @@ To add buffs we follow this steps:
 
 2. They are added on the source's buffs vector when it's created
 
-```
+``` cpp
 BuffSource::BuffSource(pugi::xml_node source_node)
 {
 	source_id = App->buff->GetNewSourceID();
@@ -186,7 +186,7 @@ BuffSource::BuffSource(pugi::xml_node source_node)
 
 3. Then they must be applied to the character, in our case, when we activate a spell.
 
-```
+``` cpp
 void AddSpellBuff(Spell * spell) {
 	if (!spell->is_active) {
 		App->scene->dwarf->AddBuff(spell);
@@ -200,7 +200,7 @@ void AddSpellBuff(Spell * spell) {
 
 4. We look to which stat is applied and call its AddBuff() function
 
-```
+``` cpp
 void Stat::AddBuff(Buff & buff)
 {
 	switch (buff.GetType())
@@ -230,7 +230,7 @@ To remove buffs we follow this steps:
 Each `BuffSource` has a unique identifier, `source_id` which we can use to detect which sources caused a certain buff.
 In our case, we are using the same code as with add buff because when the player presses the spell button we get the spell which as a member has its `source_id`.
 
-```
+``` cpp
 void AddSpellBuff(Spell * spell) {
 	if (!spell->is_active) {
 		App->scene->dwarf->AddBuff(spell);
@@ -244,7 +244,7 @@ void AddSpellBuff(Spell * spell) {
 
 2. We detect which stats the buffs alters
 
-```
+``` cpp
 void Character::RemoveBuff(BuffSource * buff_source)
 {
 	for (std::list<Buff*>::iterator buff = buff_source->buffs.begin(); buff != buff_source->buffs.end(); ++buff)
@@ -259,7 +259,7 @@ void Character::RemoveBuff(BuffSource * buff_source)
 
 3. And call `RemoveBuff(uint source_id)` on them
 
-```
+``` cpp
 void Stat::RemoveBuff(uint source_id)
 {
 	additive_buffs.erase(std::remove_if(
@@ -284,7 +284,7 @@ Now all the buffs have been removed from the respective stats lists!
 
 Finally, and the most important part is how the buffs are calculated.
 
-```
+``` cpp
 void Stat::CalculateStat()
 {
 	final_value = base_value;
@@ -351,7 +351,7 @@ For your spells you may want to add.
 You may also want to create different classes for each of the sources of buffs you can have.
 An example of an equipment class could be:
 
-```
+``` cpp
 class Equipment : public BuffSource {
 	int gold_cost;
 	int durability;
