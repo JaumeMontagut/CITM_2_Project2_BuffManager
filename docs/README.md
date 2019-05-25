@@ -12,7 +12,7 @@ We've prepared c++ code with a few exercices (TO DOs) and an explanation so that
 
 ![](https://lh3.googleusercontent.com/--Fqu5ifWEUs/WDChZLkU1iI/AAAAAAAABV4/2StCv-SrSXk-dzgv8k5xyu2m80fUcvt9wCJkCGAYYCw/w1082-h609-n-rw-no/large.gif)
 
-To start, download the project [here](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager)
+To start, download the project [here](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager).
 
 You can also download the slides [here](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/BUFF%20MANAGER.pptx).
 
@@ -318,10 +318,6 @@ One of the major optimizations you can make in a buff manager is to reduce the t
 To achieve this we already have:
 * Separated each buff in a vector depending on their type (flat or percent).
 * Only recalculated stats each time they are changed, not each time they are needed. To achieve this we've created an additional value called final_value which holds the stat value will all the buffs applied, and is recalculated each time you add or remove a buff.
-
-# The exercices
-
-Get the slides [here](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/BUFF%20MANAGER.pptx).
 
 # The adaptation
 
