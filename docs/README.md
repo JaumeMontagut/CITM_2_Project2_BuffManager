@@ -358,11 +358,11 @@ Always make sure your new class inherits from BuffSource. Note that a class can 
 
 [https://forum.unity.com/threads/tutorial-character-stats-aka-attributes-system.504095/](https://forum.unity.com/threads/tutorial-character-stats-aka-attributes-system.504095/)
 
-(https://www.youtube.com/watch?v=SH25f3cXBVc][https://www.youtube.com/watch?v=SH25f3cXBVc)
+[https://www.youtube.com/watch?v=SH25f3cXBVc](https://www.youtube.com/watch?v=SH25f3cXBVc)
 
-(https://www.youtube.com/watch?v=e8GmfoaOB4Y][https://www.youtube.com/watch?v=e8GmfoaOB4Y)
+[https://www.youtube.com/watch?v=e8GmfoaOB4Y](https://www.youtube.com/watch?v=e8GmfoaOB4Y)
 
-(http://howtomakeanrpg.com/a/how-to-make-an-rpg-stats.html][http://howtomakeanrpg.com/a/how-to-make-an-rpg-stats.html)
+[ttp://howtomakeanrpg.com/a/how-to-make-an-rpg-stats.html](http://howtomakeanrpg.com/a/how-to-make-an-rpg-stats.html)
 
 [http://www.gamasutra.com/blogs/LarsDoucet/20111101/90518/A_Status_Effect_Stacking_Algorithm.php](http://www.gamasutra.com/blogs/LarsDoucet/20111101/90518/A_Status_Effect_Stacking_Algorithm.php)
 
