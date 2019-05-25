@@ -1,8 +1,7 @@
 # The Buff Manager
 
-“I am [Jaume Montagut](https://www.linkedin.com/in/jaume-montagut-guix-7389a4166/), student of the
-[Bachelor’s Degree in Video Games by UPC at CITM](https://www.citm.upc.edu/ing/estudis/graus-videojocs/). This content is generated for the second year’s
-subject Project 2, under supervision of lecturer [Ricard Pillosu](https://es.linkedin.com/in/ricardpillosu).”
+I am [Jaume Montagut](https://www.linkedin.com/in/jaume-montagut-guix-7389a4166/), student of the
+[Bachelor’s Degree in Video Games by UPC at CITM](https://www.citm.upc.edu/ing/estudis/graus-videojocs/). This content is generated for the second year’s subject Project 2, under supervision of lecturer [Ricard Pillosu](https://es.linkedin.com/in/ricardpillosu).
 
 # The intention
 
@@ -16,6 +15,9 @@ To start, download the project found here:
 [https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager]
 
 ![](https://lh3.googleusercontent.com/--Fqu5ifWEUs/WDChZLkU1iI/AAAAAAAABV4/2StCv-SrSXk-dzgv8k5xyu2m80fUcvt9wCJkCGAYYCw/w1082-h609-n-rw-no/large.gif)
+
+You can also download the slides here:
+[https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/BUFF%20MANAGER.pptx]
 
 # The importance
 
