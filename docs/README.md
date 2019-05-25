@@ -10,14 +10,11 @@ We've prepared c++ code with a few exercices (TO DOs) and an explanation so that
 
 # The download links
 
-To start, download the project found here:
-
-[https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager]
-
 ![](https://lh3.googleusercontent.com/--Fqu5ifWEUs/WDChZLkU1iI/AAAAAAAABV4/2StCv-SrSXk-dzgv8k5xyu2m80fUcvt9wCJkCGAYYCw/w1082-h609-n-rw-no/large.gif)
 
-You can also download the slides here:
-[https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/BUFF%20MANAGER.pptx]
+To start, download the project [here](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager)
+
+You can also download the slides [here](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/BUFF%20MANAGER.pptx).
 
 # The importance
 
@@ -363,27 +360,27 @@ Always make sure your new class inherits from BuffSource. Note that a class can 
 
 # The resources
 
-[https://forum.unity.com/threads/tutorial-character-stats-aka-attributes-system.504095/] https://forum.unity.com/threads/tutorial-character-stats-aka-attributes-system.504095/
+[https://forum.unity.com/threads/tutorial-character-stats-aka-attributes-system.504095/](https://forum.unity.com/threads/tutorial-character-stats-aka-attributes-system.504095/)
 
-[https://www.youtube.com/watch?v=SH25f3cXBVc][https://www.youtube.com/watch?v=SH25f3cXBVc]
+(https://www.youtube.com/watch?v=SH25f3cXBVc][https://www.youtube.com/watch?v=SH25f3cXBVc)
 
-[https://www.youtube.com/watch?v=e8GmfoaOB4Y][https://www.youtube.com/watch?v=e8GmfoaOB4Y]
+(https://www.youtube.com/watch?v=e8GmfoaOB4Y][https://www.youtube.com/watch?v=e8GmfoaOB4Y)
 
-[http://howtomakeanrpg.com/a/how-to-make-an-rpg-stats.html][http://howtomakeanrpg.com/a/how-to-make-an-rpg-stats.html]
+(http://howtomakeanrpg.com/a/how-to-make-an-rpg-stats.html][http://howtomakeanrpg.com/a/how-to-make-an-rpg-stats.html)
 
-[http://www.gamasutra.com/blogs/LarsDoucet/20111101/90518/A_Status_Effect_Stacking_Algorithm.php][http://www.gamasutra.com/blogs/LarsDoucet/20111101/90518/A_Status_Effect_Stacking_Algorithm.php]
+[http://www.gamasutra.com/blogs/LarsDoucet/20111101/90518/A_Status_Effect_Stacking_Algorithm.php](http://www.gamasutra.com/blogs/LarsDoucet/20111101/90518/A_Status_Effect_Stacking_Algorithm.php)
 
-[https://gamedev.stackexchange.com/questions/29982/whats-a-way-to-implement-a-flexible-buff-debuff-system][https://gamedev.stackexchange.com/questions/29982/whats-a-way-to-implement-a-flexible-buff-debuff-system]
+[https://gamedev.stackexchange.com/questions/29982/whats-a-way-to-implement-a-flexible-buff-debuff-system](https://gamedev.stackexchange.com/questions/29982/whats-a-way-to-implement-a-flexible-buff-debuff-system)
 
-[https://www.youtube.com/watch?v=8Dg_QjDEs2Q&list=PLDlDppj_BAZDlDDefRh1jrxxqypvtuaCD&index=12][https://www.youtube.com/watch?v=8Dg_QjDEs2Q&list=PLDlDppj_BAZDlDDefRh1jrxxqypvtuaCD&index=12]
+[https://www.youtube.com/watch?v=8Dg_QjDEs2Q&list=PLDlDppj_BAZDlDDefRh1jrxxqypvtuaCD&index=12](https://www.youtube.com/watch?v=8Dg_QjDEs2Q&list=PLDlDppj_BAZDlDDefRh1jrxxqypvtuaCD&index=12)
 
-[https://www.youtube.com/watch?v=8gOudI_g8jM&list=PLDlDppj_BAZDlDDefRh1jrxxqypvtuaCD&index=15][https://www.youtube.com/watch?v=8gOudI_g8jM&list=PLDlDppj_BAZDlDDefRh1jrxxqypvtuaCD&index=15]
+[https://www.youtube.com/watch?v=8gOudI_g8jM&list=PLDlDppj_BAZDlDDefRh1jrxxqypvtuaCD&index=15](https://www.youtube.com/watch?v=8gOudI_g8jM&list=PLDlDppj_BAZDlDDefRh1jrxxqypvtuaCD&index=15)
 
-[https://www.youtube.com/watch?v=li6ha2d8Arw&list=PLVbdRvy0bA6lt57nPF6r5EXhqquu69wKZ&index=1][https://www.youtube.com/watch?v=li6ha2d8Arw&list=PLVbdRvy0bA6lt57nPF6r5EXhqquu69wKZ&index=1]
+[https://www.youtube.com/watch?v=li6ha2d8Arw&list=PLVbdRvy0bA6lt57nPF6r5EXhqquu69wKZ&index=1](https://www.youtube.com/watch?v=li6ha2d8Arw&list=PLVbdRvy0bA6lt57nPF6r5EXhqquu69wKZ&index=1)
 
-[https://www.gamedev.net/forums/topic/622135-time-related-state-effects-buffsdebuffs-what-are-manageable-code-designs/][https://www.gamedev.net/forums/topic/622135-time-related-state-effects-buffsdebuffs-what-are-manageable-code-designs/]
+[https://www.gamedev.net/forums/topic/622135-time-related-state-effects-buffsdebuffs-what-are-manageable-code-designs/](https://www.gamedev.net/forums/topic/622135-time-related-state-effects-buffsdebuffs-what-are-manageable-code-designs/)
 
-[https://gamedevelopment.tutsplus.com/tutorials/using-the-composite-design-pattern-for-an-rpg-attributes-system--gamedev-243][https://gamedevelopment.tutsplus.com/tutorials/using-the-composite-design-pattern-for-an-rpg-attributes-system--gamedev-243]
+[https://gamedevelopment.tutsplus.com/tutorials/using-the-composite-design-pattern-for-an-rpg-attributes-system--gamedev-243](https://gamedevelopment.tutsplus.com/tutorials/using-the-composite-design-pattern-for-an-rpg-attributes-system--gamedev-243)
 
 
 # The contact
