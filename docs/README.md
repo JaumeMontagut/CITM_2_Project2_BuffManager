@@ -21,14 +21,14 @@ You can also download the slides [here](https://github.com/JaumeMontagut/CITM_2_
 The first thing you may ask is: "Why do we need a system like this?".
 The answer is simple, when we have multiple systems that modify stats (equipment, talents, passives, etc.) and hundereds of items in those systems, making them interact becomes complete chaos if we don't have an appropriate system for it.
 
-![](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/attributes.jpg)
+![](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/attributes.jpg?raw=true)
 
 # The problem
 
 So now that we know why it is important to have a system like this we need to understand exactly what it does.
 We need to create a system that given buffs from different sources, calculates a stat that we can later use to deal damage, calculate the speed at which we need to move, how many seconds can we be stunned, etc.
 
-![](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/buff_manager_problem.png)
+![](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/buff_manager_problem.png?raw=true)
 
 # The concept
 
@@ -40,7 +40,7 @@ Our approach for this problem has been the following:
 On the other side we'll have a class named Buff Source which will be the parent of all the systems mentioned previously.
 It will hold information about the buffs that can be applied with that source.
 
-![](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/Buff_manager_approach.png)
+![](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/Buff_manager_approach.png?raw=true)
 
 ## Base Classes
 
@@ -48,7 +48,7 @@ Here we will show more in-depth the members and methods of the classes that crea
 
 ### Character Class
 
-``` cpp
+```cpp
 class Character : public Entity {
 public:
 	int curr_health;
@@ -70,7 +70,7 @@ public:
 
 ### Stat class
 
-``` cpp
+```cpp
 class Stat {
 private:
   float base_value;
@@ -91,7 +91,7 @@ public:
 
 ### Buff class
 
-``` cpp
+```cpp
 enum class BUFF_TYPE {
 	ADDITIVE, //AKA: Flat, raw
 	MULTIPLICATIVE, // AKA: Percent
@@ -119,7 +119,7 @@ Each buff can have a type. In our case we've represented the most commmon types,
 
 ### Buff source class
 
-``` cpp
+```cpp
 class BuffSource {
 private:
 	uint source_id;
@@ -132,7 +132,7 @@ public:
 
 ### Spell class
 
-``` cpp
+```cpp
 class Spell : public BuffSource {
 public:
 	bool is_active = false;
@@ -155,7 +155,7 @@ To add buffs we follow this steps:
 
 1. Buffs are defined with its source in the XML.
 
-``` cpp
+```cpp
 <spell name="rage">
   <function name="add_buff"/>
   <atlas_icon row ="0" column="4"/>
@@ -166,7 +166,7 @@ To add buffs we follow this steps:
 
 2. They are added on the source's buffs vector when it's created
 
-``` cpp
+```cpp
 BuffSource::BuffSource(pugi::xml_node source_node)
 {
 	source_id = App->buff->GetNewSourceID();
@@ -183,7 +183,7 @@ BuffSource::BuffSource(pugi::xml_node source_node)
 
 3. Then they must be applied to the character, in our case, when we activate a spell.
 
-``` cpp
+```cpp
 void AddSpellBuff(Spell * spell) {
 	if (!spell->is_active) {
 		App->scene->dwarf->AddBuff(spell);
@@ -197,7 +197,7 @@ void AddSpellBuff(Spell * spell) {
 
 4. We look to which stat is applied and call its AddBuff() function
 
-``` cpp
+```cpp
 void Stat::AddBuff(Buff & buff)
 {
 	switch (buff.GetType())
@@ -219,7 +219,7 @@ Now the buff is stored in one of the stats so it can be used to calculate its va
 
 ## Removing buffs
 
-![](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/2.PNG)
+![](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/2.PNG?raw=true)
 
 To remove buffs we follow this steps:
 
@@ -227,7 +227,7 @@ To remove buffs we follow this steps:
 Each `BuffSource` has a unique identifier, `source_id` which we can use to detect which sources caused a certain buff.
 In our case, we are using the same code as with add buff because when the player presses the spell button we get the spell which as a member has its `source_id`.
 
-``` cpp
+```cpp
 void AddSpellBuff(Spell * spell) {
 	if (!spell->is_active) {
 		App->scene->dwarf->AddBuff(spell);
@@ -241,7 +241,7 @@ void AddSpellBuff(Spell * spell) {
 
 2. We detect which stats the buffs alters
 
-``` cpp
+```cpp
 void Character::RemoveBuff(BuffSource * buff_source)
 {
 	for (std::list<Buff*>::iterator buff = buff_source->buffs.begin(); buff != buff_source->buffs.end(); ++buff)
@@ -256,7 +256,7 @@ void Character::RemoveBuff(BuffSource * buff_source)
 
 3. And call `RemoveBuff(uint source_id)` on them
 
-``` cpp
+```cpp
 void Stat::RemoveBuff(uint source_id)
 {
 	additive_buffs.erase(std::remove_if(
@@ -277,11 +277,11 @@ Now all the buffs have been removed from the respective stats lists!
 
 ## Calculating buffs
 
-![](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/3.PNG)
+![](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/3.PNG?raw=true)
 
 Finally, and the most important part is how the buffs are calculated.
 
-``` cpp
+```cpp
 void Stat::CalculateStat()
 {
 	final_value = base_value;
@@ -344,7 +344,7 @@ For your spells you may want to add.
 You may also want to create different classes for each of the sources of buffs you can have.
 An example of an equipment class could be:
 
-``` cpp
+```cpp
 class Equipment : public BuffSource {
 	int gold_cost;
 	int durability;
