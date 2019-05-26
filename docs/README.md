@@ -149,7 +149,7 @@ For this example we'll only be using a spell class. Since it's the most complex 
 
 ## Adding buffs
 
-![](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/1.PNG)
+![](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager/blob/master/docs/1.PNG?raw=true)
 
 To add buffs we follow this steps:
 
